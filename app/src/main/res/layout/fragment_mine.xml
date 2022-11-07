@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:layout_margin="20dp"
+    tools:context=".fragment.MineFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:gravity="right">
+
+        <ImageView
+            android:id="@+id/iv_my_pushScreen"
+            app:tint="#a3a3a3"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/pushscreen"/>
+
+        <ImageView
+            android:id="@+id/iv_my_scanQRCode"
+            app:tint="#a3a3a3"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginLeft="20dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/scan"/>
+
+        <ImageView
+            android:id="@+id/iv_my_change_theme"
+            app:tint="#a3a3a3"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginLeft="20dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/clothes"/>
+
+        <ImageView
+            android:id="@+id/iv_my_changeNightOrDayTimeMode"
+            app:tint="#a3a3a3"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginLeft="20dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/moon"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/ll_my_main_info"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:layout_marginLeft="20dp"
+            android:orientation="horizontal">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/iv_my_pic"
+                android:layout_width="64dp"
+                android:layout_height="64dp"
+                android:src="@drawable/icon"/>
+
+            <LinearLayout
+                android:id="@+id/ll_my_islogin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="24dp"
+                android:orientation="vertical">
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:id="@+id/tv_my_nickname"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text=""
+                        android:textSize="18dp"
+                        android:textFontWeight="700"
+                        android:textColor="@color/app_theme_color_fade"/>
+                    <ImageView
+                        android:id="@+id/tv_my_edit"
+                        app:tint="#a3a3a3"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_marginLeft="5dp"
+                        android:scaleType="fitXY"
+                        android:src="@drawable/edit"/>
+                    <ImageView
+                        android:id="@+id/tv_my_level"
+                        app:tint="@color/level_5"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_marginLeft="5dp"
+                        android:scaleType="fitXY"
+                        android:src="@drawable/lv5"/>
+                </LinearLayout>
+                <ImageView
+                    android:id="@+id/iv_my_vip"
+                    android:layout_width="90dp"
+                    android:layout_height="25dp"
+                    android:scaleType="fitXY"
+                    android:visibility="invisible"
+                    android:src="@drawable/year_vip"/>
+
+                <TextView
+                    android:id="@+id/tv_my_coininfo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="B币：0.0   硬币：1364"/>
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/ll_my_unlogin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical">
+                <TextView
+                    android:id="@+id/tv_my_login"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:text="点击登录"
+                    android:textColor="#000"
+                    android:textSize="20dp"
+                    android:visibility="invisible"/>
+            </LinearLayout>
+            <TextView
+                android:id="@+id/tv_my_space"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="80dp"
+                android:text="空间 >"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

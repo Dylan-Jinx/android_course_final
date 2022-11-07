@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/bottom_navigation"
+    app:startDestination="@id/mineFragment">
+
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.example.final_535_app.fragment.HomeFragment"
+        android:label="fragment_home"
+        tools:layout="@layout/fragment_home" />
+    <fragment
+        android:id="@+id/dynamicFragment"
+        android:name="com.example.final_535_app.fragment.DynamicFragment"
+        android:label="fragment_dynamic"
+        tools:layout="@layout/fragment_dynamic" />
+    <fragment
+        android:id="@+id/mineFragment"
+        android:name="com.example.final_535_app.fragment.MineFragment"
+        android:label="fragment_mine"
+        tools:layout="@layout/fragment_mine" />
+    <fragment
+        android:id="@+id/interactFragment"
+        android:name="com.example.final_535_app.fragment.InteractFragment"
+        android:label="fragment_interact"
+        tools:layout="@layout/fragment_interact" />
+</navigation>
