@@ -2,7 +2,9 @@ package com.example.final_535_app.fragment
 
 import android.content.Context.MODE_PRIVATE
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,7 +17,10 @@ import com.example.final_535_app.R
 import com.example.final_535_app.activity.LoginActivity
 import com.example.final_535_app.databinding.FragmentMineBinding
 import com.example.final_535_app.state.MineState
+import com.example.final_535_app.utils.HttpUtils
 import com.example.final_535_app.viewmodel.MineViewModel
+import okhttp3.internal.wait
+import kotlin.random.Random
 
 class MineFragment : Fragment(), MavericksView {
 
@@ -73,6 +78,15 @@ class MineFragment : Fragment(), MavericksView {
                 if(it.data?.vipStatus.equals("1")){
                     binding.ivMyVip.isVisible = true
                 }
+                binding.tvMyDynamicCount.text =
+                    Random(System.currentTimeMillis()).nextInt(10,1000).toString()
+                binding.tvMyFocus.text = it.data?.following.toString()
+                binding.tvMyFan.text = it.data?.fans.toString()
+                // 绑定头像
+                var face_url = HttpUtils.apiService.getMinioFile(it.data?.face.toString()).data?.resUrl
+                binding.ivMyPic.setImageURI(Uri.parse(face_url.toString()))
+                Log.d("TAG", "initEvent: "+face_url.toString())
+                //TODO 完成网络地址图片转换赋值到头像控件
             },onFail = {
                 Toast.makeText(context, "网络异常", Toast.LENGTH_SHORT).show()
             }

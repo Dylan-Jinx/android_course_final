@@ -63,13 +63,11 @@
             android:layout_marginTop="30dp"
             android:layout_marginLeft="20dp"
             android:orientation="horizontal">
-
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/iv_my_pic"
                 android:layout_width="64dp"
                 android:layout_height="64dp"
                 android:src="@drawable/icon"/>
-
             <LinearLayout
                 android:id="@+id/ll_my_islogin"
                 android:layout_width="wrap_content"
@@ -139,9 +137,89 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
-                android:layout_marginLeft="80dp"
+                android:layout_marginLeft="60dp"
                 android:text="空间 >"/>
-
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/ll_my_fanfollow"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:orientation="horizontal"
+            android:layout_marginTop="20dp">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_weight="1"
+                android:orientation="vertical">
+                <TextView
+                    android:id="@+id/tv_my_dynamic_count"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="23"
+                    android:textColor="@color/black"
+                    android:layout_gravity="center_horizontal"
+                    android:textSize="18dp"/>
+                <TextView
+                    android:text="动态"
+                    android:textSize="14dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" android:layout_gravity="center_horizontal"
+                    />
+            </LinearLayout>
+            <View
+                android:layout_width="1dp"
+                android:layout_height="24dp"
+                android:layout_gravity="center"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/draw_dividerline">
+            </View>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_weight="1"
+                android:orientation="vertical">
+                <TextView
+                    android:id="@+id/tv_my_focus"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="23"
+                    android:textColor="@color/black"
+                    android:layout_gravity="center_horizontal"
+                    android:textSize="18dp"/>
+                <TextView
+                    android:text="关注"
+                    android:textSize="14dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" android:layout_gravity="center_horizontal"
+                    />
+            </LinearLayout>
+            <View
+                android:layout_width="1dp"
+                android:layout_height="24dp"
+                android:layout_gravity="center"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/draw_dividerline">
+            </View>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_weight="1"
+                android:orientation="vertical">
+                <TextView
+                    android:id="@+id/tv_my_fan"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="23"
+                    android:textColor="@color/black"
+                    android:layout_gravity="center_horizontal"
+                    android:textSize="18dp"/>
+                <TextView
+                    android:text="粉丝"
+                    android:textSize="14dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" android:layout_gravity="center_horizontal"
+                    />
+            </LinearLayout>
         </LinearLayout>
 
     </LinearLayout>

@@ -14,4 +14,5 @@
 
     <!-- level color -->
     <color name="level_5">#ee672a</color>
+    <color name="account_line">#AFAFAF</color>
 </resources>

@@ -3,6 +3,7 @@ package com.example.final_535_app.api
 import com.example.final_535_app.common.ApiResponse
 import com.example.final_535_app.model.AppUser
 import com.example.final_535_app.model.BilibiliUserInfo
+import com.example.final_535_app.model.Minio
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.POST
@@ -19,6 +20,6 @@ interface ApiService {
     suspend fun getUserInfo(@Query("mid") mid: Int): ApiResponse<BilibiliUserInfo>
 
     @GET("/minio")
-    suspend fun getMinioFile(@Query("objectName") objectName: String)
+    suspend fun getMinioFile(@Query("objectName") objectName: String): ApiResponse<Minio>
 
 }
