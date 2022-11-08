@@ -15,4 +15,5 @@
     <!-- level color -->
     <color name="level_5">#ee672a</color>
     <color name="account_line">#AFAFAF</color>
+    <color name="message_bg_view">#28CE2F</color>
 </resources>

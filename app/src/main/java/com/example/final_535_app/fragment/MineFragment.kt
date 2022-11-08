@@ -2,7 +2,9 @@ package com.example.final_535_app.fragment
 
 import android.content.Context.MODE_PRIVATE
 import android.content.Intent
+import android.graphics.BitmapFactory
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -13,13 +15,20 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import com.airbnb.mvrx.MavericksView
 import com.airbnb.mvrx.fragmentViewModel
+import com.bumptech.glide.load.resource.bitmap.BitmapDrawableEncoder
 import com.example.final_535_app.R
 import com.example.final_535_app.activity.LoginActivity
 import com.example.final_535_app.databinding.FragmentMineBinding
 import com.example.final_535_app.state.MineState
 import com.example.final_535_app.utils.HttpUtils
+import com.example.final_535_app.utils.ImageConvertUtil.byteToBitmap
 import com.example.final_535_app.viewmodel.MineViewModel
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
+import okhttp3.OkHttpClient
 import okhttp3.internal.wait
+import retrofit2.create
+import java.net.URL
 import kotlin.random.Random
 
 class MineFragment : Fragment(), MavericksView {
@@ -49,8 +58,11 @@ class MineFragment : Fragment(), MavericksView {
             binding.llMyUnlogin.isVisible=true
             binding.ivMyPic.setImageResource(R.drawable.icon)
             binding.tvMyLogin.isVisible = true
+            binding.llMyFanfollow.isVisible = false
+
         }else {
             binding.llMyUnlogin.isVisible = true
+            binding.llMyFanfollow.isVisible = true
         }
     }
 
@@ -84,9 +96,14 @@ class MineFragment : Fragment(), MavericksView {
                 binding.tvMyFan.text = it.data?.fans.toString()
                 // 绑定头像
                 var face_url = HttpUtils.apiService.getMinioFile(it.data?.face.toString()).data?.resUrl
-                binding.ivMyPic.setImageURI(Uri.parse(face_url.toString()))
-                Log.d("TAG", "initEvent: "+face_url.toString())
+
                 //TODO 完成网络地址图片转换赋值到头像控件
+                withContext(Dispatchers.IO){
+                    var face_mip = byteToBitmap(URL(face_url).openStream().readBytes())
+                    activity?.runOnUiThread {
+                        binding.ivMyPic.setImageBitmap(face_mip)
+                    }
+                }
             },onFail = {
                 Toast.makeText(context, "网络异常", Toast.LENGTH_SHORT).show()
             }
