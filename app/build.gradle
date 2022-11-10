@@ -7,7 +7,7 @@ android {
     compileSdk 33
     defaultConfig {
         applicationId "com.example.final_535_app"
-        minSdk 21
+        minSdk 28
         targetSdk 33
         versionCode 1
         versionName "1.0"
@@ -55,6 +55,7 @@ dependencies {
     annotationProcessor "com.airbnb.android:epoxy-processor:5.0.0"
     implementation 'com.squareup.retrofit2:retrofit:2.9.0'
     implementation 'com.squareup.retrofit2:converter-moshi:2.9.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
     implementation 'com.squareup.moshi:moshi-kotlin:1.14.0'
     implementation 'com.squareup.okhttp3:logging-interceptor:5.0.0-alpha.2'
 

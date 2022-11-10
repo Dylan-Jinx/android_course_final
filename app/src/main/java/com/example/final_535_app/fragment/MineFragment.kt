@@ -16,7 +16,6 @@ import com.airbnb.mvrx.fragmentViewModel
 import com.airbnb.mvrx.withState
 import com.example.final_535_app.R
 import com.example.final_535_app.activity.LoginActivity
-import com.example.final_535_app.common.ApiResponse
 import com.example.final_535_app.databinding.FragmentMineBinding
 import com.example.final_535_app.model.BilibiliUserInfo
 import com.example.final_535_app.state.MineState
@@ -28,29 +27,15 @@ import com.example.final_535_app.viewmodel.MineViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import java.net.URL
-import java.util.Base64
 import kotlin.random.Random
 
-class MineFragment : Fragment(), MavericksView {
+class MineFragment : Fragment(R.layout.fragment_mine), MavericksView {
 
     var isLogin: Boolean = false
     // 绑定界面
     lateinit var binding: FragmentMineBinding
     val mineViewModel: MineViewModel by fragmentViewModel(MineViewModel::class)
     var mid = 0
-
-    override fun onResume() {
-        super.onResume()
-        val sharedPreferences = context?.getSharedPreferences("user", MODE_PRIVATE)
-        mid = sharedPreferences?.getInt("mid",0)!!
-        if(mid != 0){
-            isLogin = true
-            mid?.let { mineViewModel.getInfo(it) }
-        }else{
-            isLogin = false
-        }
-        loginStateViewVisual()
-    }
 
     private fun loginStateViewVisual() {
         if(!isLogin){
@@ -71,6 +56,15 @@ class MineFragment : Fragment(), MavericksView {
         binding = FragmentMineBinding.inflate(layoutInflater)
         val view = binding.root
         initEvent()
+        val sharedPreferences = context?.getSharedPreferences("user", MODE_PRIVATE)
+        mid = sharedPreferences?.getInt("mid",0)!!
+        if(mid != 0){
+            isLogin = true
+            mid?.let { mineViewModel.getInfo(it) }
+        }else{
+            isLogin = false
+        }
+        loginStateViewVisual()
         return view
     }
 
@@ -89,7 +83,7 @@ class MineFragment : Fragment(), MavericksView {
                     withContext(Dispatchers.IO){
                         var face_mip = byteToBitmap(URL(face_url).openStream().readBytes())!!
                         setBitmap2Local(context, mid, face_mip)
-                        activity?.runOnUiThread {
+                        withContext(Dispatchers.Main.immediate){
                             binding.ivMyPic.setImageBitmap(face_mip)
                         }
                     }
@@ -107,10 +101,8 @@ class MineFragment : Fragment(), MavericksView {
         var test = getValueToSharePreference(context,"user_data",BilibiliUserInfo::class.java)
         if(test == null){
             setValueToSharePreference(context, "user_data", it?.data)
-            Toast.makeText(context, "在线读取", Toast.LENGTH_SHORT).show()
         }else{
             UIComponentRefresh(test)
-            binding.ivMyPic.setImageBitmap(getBitmapFromLocal(context, mid))
         }
 
     }

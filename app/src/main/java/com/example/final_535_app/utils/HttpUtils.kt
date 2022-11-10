@@ -6,6 +6,7 @@ import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.converter.moshi.MoshiConverterFactory
 
 object HttpUtils {
@@ -20,9 +21,12 @@ object HttpUtils {
 
     val retrofit: Retrofit by lazy {
         Retrofit.Builder()
-            .baseUrl("http://192.168.123.116:8080")
+//            .baseUrl("http://192.168.123.52:8080")
+            .baseUrl("http://192.168.43.175:8080")
 //            .baseUrl("http://192.168.2.8:8080")
+//            .baseUrl("http://10.22.106.186:8080")
             .addConverterFactory(MoshiConverterFactory.create(moshi))
+            .addConverterFactory(GsonConverterFactory.create())
             .client(clent)
             .build()
     }

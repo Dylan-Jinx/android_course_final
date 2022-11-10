@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:layout_margin="20dp"
+    android:padding="10dp"
     tools:context=".fragment.MineFragment">
 
     <LinearLayout
@@ -64,8 +64,7 @@
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/iv_my_pic"
                 android:layout_width="64dp"
-                android:layout_height="64dp"
-                android:src="@drawable/icon"/>
+                android:layout_height="64dp"/>
             <LinearLayout
                 android:id="@+id/ll_my_islogin"
                 android:layout_width="wrap_content"
@@ -124,7 +123,7 @@
                     android:id="@+id/tv_my_login"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
+                    android:layout_marginLeft="0dp"
                     android:text="点击登录"
                     android:textColor="#000"
                     android:textSize="20dp"
@@ -135,7 +134,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
-                android:layout_marginLeft="15dp"
+                android:layout_marginLeft="0dp"
                 android:text="空间 >"/>
         </LinearLayout>
         <LinearLayout

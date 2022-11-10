@@ -1,5 +1,6 @@
 package com.example.final_535_app.viewmodel
 
+import android.util.Log
 import com.airbnb.mvrx.Loading
 import com.airbnb.mvrx.MavericksViewModel
 import com.example.final_535_app.model.AppUser
