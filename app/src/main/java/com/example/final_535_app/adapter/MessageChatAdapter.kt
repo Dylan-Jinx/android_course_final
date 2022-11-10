@@ -3,6 +3,7 @@ package com.example.final_535_app.adapter
 import LocalCacheUtils.getBitmapFromLocal
 import LocalCacheUtils.setBitmap2Local
 import android.graphics.Bitmap
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -45,18 +46,20 @@ class MessageChatAdapter(val messageList: MutableList<BilibiliUserInfo>) : Recyc
 
     inner class MessageChatViewHolder(binding: RecyclerviewItemMessageChatBinding): RecyclerView.ViewHolder(binding.root) {
         val context = binding.root.context
+        @OptIn(DelicateCoroutinesApi::class)
         fun bindData(data: BilibiliUserInfo) {
             binding.tvRecyclerviewUsername.text = data.name
             var face_mip: Bitmap? = null
             if (getBitmapFromLocal(context, data.mid) == null){
                 GlobalScope.launch(Dispatchers.IO) {
-                    var face_url = data.face?.let { HttpUtils.apiService.getMinioFile(it).data?.resUrl }
+                    val face_url = data.face?.let { HttpUtils.apiService.getMinioFile(it).data?.resUrl }
                     face_mip =
                         ImageConvertUtil.byteToBitmap(URL(face_url).openStream().readBytes())!!
-                }.apply {
                     setBitmap2Local(context, data.mid, face_mip)
+                }.apply {
+                    binding.ivMessageRecircleItemPic.setImageBitmap(getBitmapFromLocal(context, data.mid))
                     GlobalScope.launch {
-                        withContext(Dispatchers.Main.immediate){
+                        withContext(Dispatchers.Main){
                             binding.ivMessageRecircleItemPic.setImageBitmap(face_mip)
                         }
                     }

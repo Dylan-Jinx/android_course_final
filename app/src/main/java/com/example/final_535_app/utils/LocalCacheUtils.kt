@@ -34,7 +34,7 @@ object LocalCacheUtils {
             val fileName: String = url.toString()
             val file = File(FILE_PATH, fileName)
             val fileParent = file.getParentFile();
-            if (!fileParent.exists()) {
+            if (!fileParent!!.exists()) {
                 fileParent.mkdirs();
             }
             bitmap?.compress(Bitmap.CompressFormat.JPEG, 100, FileOutputStream(file));

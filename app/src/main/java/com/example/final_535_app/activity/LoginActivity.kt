@@ -77,7 +77,7 @@ class LoginActivity : AppCompatActivity(),MavericksView {
             onBackPressed()
         }
         // 焦点事件与页面交互
-        binding.etLoginPwd.setOnFocusChangeListener { view, focuState ->
+        binding.etLoginPwd.setOnFocusChangeListener { _, focuState ->
             if (focuState) {
                 binding.ivLoginBannerLeft.setImageResource(R.drawable.login_left_close)
                 binding.ivLoginBannerRight.setImageResource(R.drawable.login_right_close)
