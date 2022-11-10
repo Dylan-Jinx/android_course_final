@@ -2,20 +2,19 @@ package com.example.final_535_app.adapter
 
 import LocalCacheUtils.getBitmapFromLocal
 import LocalCacheUtils.setBitmap2Local
-import android.app.Activity
-import android.content.Context
 import android.graphics.Bitmap
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.example.final_535_app.R
 import com.example.final_535_app.databinding.RecyclerviewItemMessageChatBinding
 import com.example.final_535_app.model.BilibiliUserInfo
 import com.example.final_535_app.utils.HttpUtils
 import com.example.final_535_app.utils.ImageConvertUtil
-import kotlinx.coroutines.*
-import okhttp3.internal.notify
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import java.net.URL
 
 class MessageChatAdapter(val messageList: MutableList<BilibiliUserInfo>) : RecyclerView.Adapter<MessageChatAdapter.MessageChatViewHolder>() {
