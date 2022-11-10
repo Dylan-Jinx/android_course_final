@@ -12,10 +12,7 @@ import com.example.final_535_app.databinding.RecyclerviewItemMessageChatBinding
 import com.example.final_535_app.model.BilibiliUserInfo
 import com.example.final_535_app.utils.HttpUtils
 import com.example.final_535_app.utils.ImageConvertUtil
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
+import kotlinx.coroutines.*
 import java.net.URL
 
 class MessageChatAdapter(val messageList: MutableList<BilibiliUserInfo>) : RecyclerView.Adapter<MessageChatAdapter.MessageChatViewHolder>() {
