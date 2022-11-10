@@ -23,4 +23,4 @@ data class BilibiliUserInfo(
     val fans: Int? = null,
     val archiveview: Int? = null,
     val article: Int? = null
-)
+):java.io.Serializable

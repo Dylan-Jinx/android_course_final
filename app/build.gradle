@@ -5,7 +5,6 @@ plugins {
 android {
     namespace 'com.example.final_535_app'
     compileSdk 33
-
     defaultConfig {
         applicationId "com.example.final_535_app"
         minSdk 21
@@ -66,6 +65,7 @@ dependencies {
 
     // circle image component
     implementation 'de.hdodenhof:circleimageview:3.1.0'
+    implementation 'com.google.code.gson:gson:2.10'
 
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
