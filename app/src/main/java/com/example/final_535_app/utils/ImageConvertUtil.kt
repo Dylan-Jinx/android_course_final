@@ -9,7 +9,7 @@ import java.lang.ref.SoftReference
 
 
 object ImageConvertUtil {
-    fun byteToBitmap(imgByte: ByteArray?): Bitmap? {
+    fun byteToBitmap (imgByte: ByteArray?): Bitmap? {
         var imgByte = imgByte
         var input: InputStream? = null
         var bitmap: Bitmap? = null

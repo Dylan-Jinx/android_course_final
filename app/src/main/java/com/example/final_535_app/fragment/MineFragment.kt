@@ -48,6 +48,9 @@ class MineFragment : Fragment(R.layout.fragment_mine), MavericksView {
             binding.llMyUnlogin.isVisible = true
         }
     }
+    override fun onResume() {
+        super.onResume()
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -55,16 +58,16 @@ class MineFragment : Fragment(R.layout.fragment_mine), MavericksView {
     ): View? {
         binding = FragmentMineBinding.inflate(layoutInflater)
         val view = binding.root
-        initEvent()
         val sharedPreferences = context?.getSharedPreferences("user", MODE_PRIVATE)
         mid = sharedPreferences?.getInt("mid",0)!!
         if(mid != 0){
             isLogin = true
-            mid?.let { mineViewModel.getInfo(it) }
+            mid.let { mineViewModel.getInfo(it) }
         }else{
             isLogin = false
         }
         loginStateViewVisual()
+        initEvent()
         return view
     }
 
@@ -76,10 +79,10 @@ class MineFragment : Fragment(R.layout.fragment_mine), MavericksView {
         mineViewModel.onAsync(
             MineState:: userInfo,
             deliveryMode = uniqueOnly(),
-            onSuccess = {
+            onSuccess = { it ->
                 // 绑定头像
                 if (getBitmapFromLocal(context, mid) == null){
-                    var face_url = HttpUtils.apiService.getMinioFile(it?.data?.face.toString()).data?.resUrl
+                    var face_url = it.data?.face?.let { it1 -> HttpUtils.apiService.getMinioFile(it1).data?.resUrl }
                     withContext(Dispatchers.IO){
                         var face_mip = byteToBitmap(URL(face_url).openStream().readBytes())!!
                         setBitmap2Local(context, mid, face_mip)
@@ -98,13 +101,11 @@ class MineFragment : Fragment(R.layout.fragment_mine), MavericksView {
 
     override fun invalidate() = withState(mineViewModel) { state ->
         var it = state.userInfo.invoke()
-        var test = getValueToSharePreference(context,"user_data",BilibiliUserInfo::class.java)
-        if(test == null){
-            setValueToSharePreference(context, "user_data", it?.data)
-        }else{
+        setValueToSharePreference(context, "user_data", it?.data)
+        if(isLogin){
+            var test = getValueToSharePreference(context,"user_data",BilibiliUserInfo::class.java)
             UIComponentRefresh(test)
         }
-
     }
 
     private fun UIComponentRefresh(it: BilibiliUserInfo?) {
@@ -113,8 +114,7 @@ class MineFragment : Fragment(R.layout.fragment_mine), MavericksView {
         if(it?.vipStatus.equals("1")){
             binding.ivMyVip.isVisible = true
         }
-        binding.tvMyDynamicCount.text =
-            Random(System.currentTimeMillis()).nextInt(10,1000).toString()
+        binding.tvMyDynamicCount.text = "2333"
         binding.tvMyFocus.text = it?.following.toString()
         binding.tvMyFan.text = it?.fans.toString()
     }

@@ -30,21 +30,22 @@ class MessageActivity : AppCompatActivity(), MavericksView {
             MessageChatState::messageChats,
             deliveryMode = uniqueOnly(),
             onSuccess = {
-                Toast.makeText(baseContext, "2334", Toast.LENGTH_SHORT).show()
                 binding.rcMessageChat.layoutManager = LinearLayoutManager(this)
-                var messageChatAdapter = it.data?.records?.let { it1 -> MessageChatAdapter(it1) }!!
+                var messageChatAdapter = it.data?.records?.let { it1 -> MessageChatAdapter(it1) }
                 binding.rcMessageChat.adapter = messageChatAdapter
             },
             onFail = {
-                Toast.makeText(baseContext, "233", Toast.LENGTH_SHORT).show()
+                Toast.makeText(baseContext, "网络开小差啦～", Toast.LENGTH_SHORT).show()
             }
         )
+
         binding.ivMessageBack.setOnClickListener {
             onBackPressed()
         }
+
     }
 
-    override fun invalidate() = withState(messageChatViewModel) { messageChatState ->
+    override fun invalidate() = withState(messageChatViewModel) {
 
     }
 }

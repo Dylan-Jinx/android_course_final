@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.os.Handler
 import com.example.final_535_app.R
 
+@Suppress("DEPRECATION")
 class LauncherActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
