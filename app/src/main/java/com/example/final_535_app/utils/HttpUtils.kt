@@ -21,10 +21,11 @@ object HttpUtils {
 
     val retrofit: Retrofit by lazy {
         Retrofit.Builder()
-//            .baseUrl("http://192.168.123.52:8080")
-            .baseUrl("http://192.168.43.175:8080")
+            .baseUrl("http://192.168.123.52:8080")
+//            .baseUrl("http://192.168.43.175:8080")
 //            .baseUrl("http://192.168.2.8:8080")
 //            .baseUrl("http://10.22.106.186:8080")
+//            .baseUrl("http://10.22.170.161:8080")
             .addConverterFactory(MoshiConverterFactory.create(moshi))
             .addConverterFactory(GsonConverterFactory.create())
             .client(clent)

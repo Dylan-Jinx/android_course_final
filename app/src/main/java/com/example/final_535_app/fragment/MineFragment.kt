@@ -14,6 +14,7 @@ import androidx.fragment.app.Fragment
 import com.airbnb.mvrx.MavericksView
 import com.airbnb.mvrx.fragmentViewModel
 import com.airbnb.mvrx.withState
+import com.bumptech.glide.Glide
 import com.example.final_535_app.R
 import com.example.final_535_app.activity.LoginActivity
 import com.example.final_535_app.databinding.FragmentMineBinding
@@ -81,13 +82,16 @@ class MineFragment : Fragment(R.layout.fragment_mine), MavericksView {
             deliveryMode = uniqueOnly(),
             onSuccess = { it ->
                 // 绑定头像
-                if (getBitmapFromLocal(context, mid) == null){
-                    var face_url = it.data?.face?.let { it1 -> HttpUtils.apiService.getMinioFile(it1).data?.resUrl }
+                if (getBitmapFromLocal(context, mid) == null) {
                     withContext(Dispatchers.IO){
-                        var face_mip = byteToBitmap(URL(face_url).openStream().readBytes())!!
+                        var face_mip = byteToBitmap(URL(it.data?.face).openStream().readBytes())!!
                         setBitmap2Local(context, mid, face_mip)
-                        withContext(Dispatchers.Main.immediate){
-                            binding.ivMyPic.setImageBitmap(face_mip)
+                        withContext(Dispatchers.Main){
+                            context?.let { it1 ->
+                                Glide.with(it1)
+                                    .load(it.data?.face)
+                                    .into(binding.ivMyPic)
+                            }
                         }
                     }
                 }else{

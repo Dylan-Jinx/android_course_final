@@ -38,7 +38,7 @@ class MainActivity : AppCompatActivity() {
         Manifest.permission.WRITE_EXTERNAL_STORAGE)
         if (!flag){
             ActivityCompat.requestPermissions(this,
-                arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE),100);
+                arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE),1);
         }
     }
     fun initView() {
