@@ -1,19 +1,14 @@
 package com.example.final_535_app.adapter
 
-import LocalCacheUtils.getBitmapFromLocal
-import LocalCacheUtils.setBitmap2Local
-import android.graphics.Bitmap
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.example.final_535_app.R
 import com.example.final_535_app.databinding.RecyclerviewItemMessageChatBinding
 import com.example.final_535_app.model.BilibiliUserInfo
-import com.example.final_535_app.utils.HttpUtils
-import com.example.final_535_app.utils.ImageConvertUtil
 import kotlinx.coroutines.*
-import java.net.URL
 
 class MessageChatAdapter(val messageList: MutableList<BilibiliUserInfo>) : RecyclerView.Adapter<MessageChatAdapter.MessageChatViewHolder>() {
 
@@ -41,30 +36,19 @@ class MessageChatAdapter(val messageList: MutableList<BilibiliUserInfo>) : Recyc
     //TODO: recycleView的每条数据点击事件待完成
 
 
-    inner class MessageChatViewHolder(binding: RecyclerviewItemMessageChatBinding): RecyclerView.ViewHolder(binding.root) {
+    inner class MessageChatViewHolder(
+        binding: RecyclerviewItemMessageChatBinding
+    ): RecyclerView.ViewHolder(binding.root) {
         val context = binding.root.context
-        @OptIn(DelicateCoroutinesApi::class)
         fun bindData(data: BilibiliUserInfo) {
             binding.tvRecyclerviewUsername.text = data.name
-            var face_mip: Bitmap? = null
-            if (getBitmapFromLocal(context, data.mid) == null){
-                GlobalScope.launch(Dispatchers.IO) {
-                    val face_url = data.face?.let { HttpUtils.apiService.getMinioFile(it).data?.resUrl }
-                    face_mip =
-                        ImageConvertUtil.byteToBitmap(URL(face_url).openStream().readBytes())!!
-                    setBitmap2Local(context, data.mid, face_mip)
-                }.apply {
-                    binding.ivMessageRecircleItemPic.setImageBitmap(getBitmapFromLocal(context, data.mid))
-                    GlobalScope.launch {
-                        withContext(Dispatchers.Main){
-                            binding.ivMessageRecircleItemPic.setImageBitmap(face_mip)
-                        }
-                    }
-                }
-            }
-            else{
-                binding.ivMessageRecircleItemPic.setImageBitmap(getBitmapFromLocal(context, data.mid))
-            }
+            Glide.with(binding.root)
+                .load(data.face)
+                .placeholder(R.drawable.icon)
+                .diskCacheStrategy(DiskCacheStrategy.DATA)
+                .dontAnimate()
+                .into(binding.ivMessageRecircleItemPic)
+
         }
     }
 }
