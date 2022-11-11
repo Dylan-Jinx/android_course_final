@@ -48,7 +48,6 @@ class MessageChatAdapter(val messageList: MutableList<BilibiliUserInfo>) : Recyc
                 .diskCacheStrategy(DiskCacheStrategy.DATA)
                 .dontAnimate()
                 .into(binding.ivMessageRecircleItemPic)
-
         }
     }
 }

@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="220dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="horizontal"
+    android:layout_marginTop="10dp">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:cardCornerRadius="10dp"
+        android:layout_margin="5dp"
+        android:layout_weight="1">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <com.example.final_535_app.view.RectangleView
+                android:id="@+id/home_rv_video_brand"
+                android:layout_width="match_parent"
+                android:layout_height="120dp"
+                android:src="@drawable/home_test"/>
+
+            <TextView
+                android:id="@+id/tv_home_video_name"
+                android:layout_width="wrap_content"
+                android:layout_height="60dp"
+                android:textSize="14dp"
+                android:textColor="@color/black"
+                android:text="湿发李知恩！IU《eight》MV幕后拍摄花絮！中字版！"/>
+
+            <TextView
+                android:id="@+id/tv_home_video_owner"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="12dp"
+                android:layout_marginLeft="5dp"
+                android:text="萌新出了没"/>
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:cardCornerRadius="10dp"
+        android:layout_margin="5dp"
+        android:layout_weight="1">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <com.example.final_535_app.view.RectangleView
+                android:id="@+id/home_rv_video_brand2"
+                android:layout_width="match_parent"
+                android:layout_height="120dp"
+                android:src="@drawable/home_test"/>
+
+            <TextView
+                android:id="@+id/tv_home_video_name2"
+                android:layout_width="wrap_content"
+                android:layout_height="60dp"
+                android:textSize="14dp"
+                android:textColor="@color/black"
+                android:text="湿发李知恩！IU《eight》MV幕后拍摄花絮！中字版！"/>
+
+            <TextView
+                android:id="@+id/tv_home_video_owner2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="12dp"
+                android:layout_marginLeft="5dp"
+                android:text="萌新出了没"/>
+        </LinearLayout>
+
+
+
+    </androidx.cardview.widget.CardView>
+
+</LinearLayout>
