@@ -39,7 +39,7 @@
             android:layout_height="40dp"
             android:background="?attr/selectableItemBackgroundBorderless"
             android:padding="12dp"
-            android:src="@mipmap/nur_ic_back" />
+            android:src="@drawable/nur_ic_back" />
 
         <TextView
             android:id="@+id/nur_videoName"
@@ -105,7 +105,7 @@
             android:layout_height="40dp"
             android:layout_gravity="center"
             android:padding="12dp"
-            android:src="@mipmap/nur_ic_microphone"
+            android:src="@drawable/nur_ic_microphone"
             android:visibility="gone" />
 
         <ImageView
@@ -114,7 +114,7 @@
             android:layout_height="40dp"
             android:layout_gravity="center"
             android:padding="12dp"
-            android:src="@mipmap/nur_ic_fangda" />
+            android:src="@drawable/nur_ic_fangda" />
 
 
     </LinearLayout>
@@ -129,7 +129,7 @@
         android:layout_marginLeft="10dp"
         android:background="@drawable/simple_video_border_radius"
         android:padding="10dp"
-        android:src="@mipmap/nur_ic_unlock" />
+        android:src="@drawable/nur_ic_unlock" />
 
     <ImageView
         android:id="@+id/nur_video_view_RC_btn"
@@ -152,7 +152,7 @@
         android:paddingLeft="4dp"
         android:paddingTop="16dp"
         android:paddingBottom="16dp"
-        android:src="@mipmap/nur_ic_play" />
+        android:src="@drawable/nur_ic_play" />
 
     <LinearLayout
         android:id="@+id/nur_videoSeekBarBox"
@@ -235,7 +235,7 @@
             android:id="@+id/nur_video_volumeIcon"
             android:layout_width="18dp"
             android:layout_height="18dp"
-            android:src="@mipmap/nur_ic_volume" />
+            android:src="@drawable/nur_ic_volume" />
 
         <SeekBar
             android:id="@+id/nur_volumeSeekBar"

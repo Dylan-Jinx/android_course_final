@@ -13,7 +13,6 @@ import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.*
-import android.widget.SeekBar.OnSeekBarChangeListener
 import androidx.annotation.ColorInt
 import androidx.annotation.Nullable
 import com.example.final_535_app.R
@@ -37,7 +36,7 @@ class NurVideoPlayer @JvmOverloads constructor(
     private val mContext: Context,
     @Nullable attrs: AttributeSet? = null,
     defStyleAttr: Int = 0
-) :
+) :SeekBar.OnSeekBarChangeListener,
     LinearLayout(mContext, attrs, defStyleAttr), View.OnClickListener {
     private val TAG = "NurVideoPlayer"
 
@@ -166,7 +165,7 @@ class NurVideoPlayer @JvmOverloads constructor(
         mCenterPlayBtn?.setOnClickListener(this)
         mPlayBtn?.setOnClickListener(this)
         screenView?.setOnClickListener(this)
-        mVideoSeekBar?.setOnClickListener(seekBarChangeListener as OnClickListener)
+        mVideoSeekBar?.setOnClickListener(this)
         mVolumeControl = findViewById(R.id.nur_video_volumeControl)
         mVolumeSeekBar = findViewById(R.id.nur_volumeSeekBar)
         volumeIcon = findViewById(R.id.nur_video_volumeIcon)
@@ -284,8 +283,8 @@ class NurVideoPlayer @JvmOverloads constructor(
             controlIsShow = true
             changeControl()
             isLock = !isLock
-            if (isLock) mLockImage!!.setImageResource(R.mipmap.nur_ic_lock) else mLockImage!!.setImageResource(
-                R.mipmap.nur_ic_unlock
+            if (isLock) mLockImage!!.setImageResource(R.drawable.nur_ic_lock) else mLockImage!!.setImageResource(
+                R.drawable.nur_ic_unlock
             )
         } else if (id == R.id.nur_video_playIv) {
             if (!isLock) {
@@ -294,6 +293,8 @@ class NurVideoPlayer @JvmOverloads constructor(
         } else if (id == R.id.nur_video_backIv) {
             if (onBackPressListener != null) {
                 onBackPressListener!!.onClick(v)
+                Toast.makeText(context,"234215",Toast.LENGTH_SHORT)
+                    .show()
             }
         }
     }
@@ -407,11 +408,11 @@ class NurVideoPlayer @JvmOverloads constructor(
         if (view == null) {
             return null
         }
-        val animators: MutableList<Animator> = ArrayList()
-        val length = view.size
-        for (i in 0 until length) {
-            animators.add(getObjectAnimator(start, end, propertyName, view[i]) as Animator)
-        }
+        val animators: MutableList<Animator> = mutableListOf()
+        var length:Int = view.size
+//        for (i in 0 until length) {
+//            animators.add(getObjectAnimator(start, end, propertyName, view[i]) as Animator)
+//        }
         return animators
     }
 
@@ -516,27 +517,6 @@ class NurVideoPlayer @JvmOverloads constructor(
         }
     }
 
-    /**
-     * seekBarChangeListener
-     */
-    private val seekBarChangeListener: OnSeekBarChangeListener = object : OnSeekBarChangeListener {
-        override fun onProgressChanged(seekBar: SeekBar, progress: Int, fromUser: Boolean) {
-            if (isTouchProgress) {
-                videoSeekChange(progress)
-            }
-        }
-
-        override fun onStartTrackingTouch(seekBar: SeekBar) {
-            isTouchProgress = true
-        }
-
-        override fun onStopTrackingTouch(seekBar: SeekBar) {
-            mVideoView!!.seekTo(seekBar.progress)
-            autoDismiss()
-            hideVideoSeek()
-            isTouchProgress = false
-        }
-    }
 
     /**
      * 显示中间seek
@@ -549,9 +529,9 @@ class NurVideoPlayer @JvmOverloads constructor(
             mCenterPlayBtn!!.visibility = INVISIBLE
         }
         if (progress > oldProgress) {
-            mVideoSeekBarImage!!.setImageResource(R.mipmap.nur_ic_kuaijin_r)
+            mVideoSeekBarImage!!.setImageResource(R.drawable.nur_ic_kuaijin_r)
         } else {
-            mVideoSeekBarImage!!.setImageResource(R.mipmap.nur_ic_kuaijin)
+            mVideoSeekBarImage!!.setImageResource(R.drawable.nur_ic_kuaijin)
         }
         val max = videoMaxDuration
         if (progress < 0) {
@@ -628,7 +608,7 @@ class NurVideoPlayer @JvmOverloads constructor(
             }
             mVolumeSeekBar!!.max = MAX_LIANG_DU.toInt()
             setWindowBrightness(progress)
-            setProgress(progress, R.mipmap.nur_ic_brightness)
+            setProgress(progress, R.drawable.nur_ic_brightness)
         }
 
         override fun onActionUp(changeType: Int) {
@@ -680,9 +660,9 @@ class NurVideoPlayer @JvmOverloads constructor(
     private fun setVolume(f: Float) {
         mVolumeSeekBar!!.max = 200
         val progress = f.toInt() + oldVolumeProgress
-        var res: Int = R.mipmap.nur_ic_volume
+        var res: Int = R.drawable.nur_ic_volume
         if (progress <= 0) {
-            res = R.mipmap.nur_ic_volume_x
+            res = R.drawable.nur_ic_volume_x
         }
         setProgress(progress, res)
         if (am == null) {
@@ -790,5 +770,22 @@ class NurVideoPlayer @JvmOverloads constructor(
      */
     fun setOnMediaListener(mediaListener: OnMediaListener?) {
         this.mediaListener = mediaListener
+    }
+
+    override fun onProgressChanged(seekBar: SeekBar, progress: Int, fromUser: Boolean) {
+        if (isTouchProgress) {
+            videoSeekChange(progress)
+        }
+    }
+
+    override fun onStartTrackingTouch(seekBar: SeekBar) {
+        isTouchProgress = true
+    }
+
+    override fun onStopTrackingTouch(seekBar: SeekBar) {
+        mVideoView!!.seekTo(seekBar.progress)
+        autoDismiss()
+        hideVideoSeek()
+        isTouchProgress = false
     }
 }

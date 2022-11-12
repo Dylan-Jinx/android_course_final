@@ -1,4 +1,4 @@
-package com.nurmemet.nur.nurvideoplayer
+package com.example.final_535_app.view.simplevideo
 
 import android.app.Activity
 import android.content.Context
@@ -15,20 +15,10 @@ import android.widget.RelativeLayout
 import androidx.annotation.DrawableRes
 import androidx.annotation.Nullable
 import com.example.final_535_app.R
-import com.example.final_535_app.view.simplevideo.NurVideoPlayer
 import com.example.final_535_app.view.simplevideo.listener.OnControlClickListener
 import com.example.final_535_app.view.simplevideo.listener.OnMediaListener
 import tv.danmaku.ijk.media.player.IMediaPlayer
 
-/**
- * Created by Nurmemet on 2020/4/9
- * Email: nur01@qq.com
- * qq:643229571
- *
- *
- * ijkPlayer的封装-（支持http和https-支持屏幕滑动--滑动时间,亮度,声音,支持全屏-单屏,双击暂停--继续,锁定屏幕-可以设置声道-单声道播放（ktv的风格））
- * 简述：https://www.jianshu.com/p/9e3319b2c2fb
- */
 class NurVideoView @JvmOverloads constructor(
     context: Context,
     @Nullable attrs: AttributeSet? = null,
@@ -313,10 +303,10 @@ class NurVideoView @JvmOverloads constructor(
         }
         if (isPortrait) {
             mActivity!!.window.addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN)
-            mScreenView!!.setImageResource(R.mipmap.nur_ic_fangxiao)
+            mScreenView!!.setImageResource(R.drawable.nur_ic_fangxiao)
         } else {
             mActivity!!.window.clearFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN)
-            mScreenView!!.setImageResource(R.mipmap.nur_ic_fangda)
+            mScreenView!!.setImageResource(R.drawable.nur_ic_fangda)
         }
         isPortrait = !isPortrait
         if (mediaListener != null) {

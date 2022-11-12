@@ -18,7 +18,7 @@ interface OnMediaListener {
      * 播放进度
      *
      * @param progress // 正在播放到哪儿了
-     * @param duration // 视频总长都
+     * @param duration // 视频长度
      */
     fun onProgress(progress: Int, duration: Int)
 

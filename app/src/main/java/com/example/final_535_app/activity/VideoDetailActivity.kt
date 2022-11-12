@@ -3,6 +3,7 @@ package com.example.final_535_app.activity
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.KeyEvent
 import android.widget.TextView
 import android.widget.Toast
 import com.airbnb.mvrx.MavericksView
@@ -32,7 +33,7 @@ class VideoDetailActivity : AppCompatActivity(), MavericksView {
             deliveryMode = uniqueOnly(),
             onSuccess = {
                 invalidate()
-                it.data?.videoUrl?.let { it1 -> binding.vdVideoView.setVideoPath(it1) }
+                it.data?.videoUrl?.let { it1 -> binding.vdVideoView.setUp(this, it1) }
                 binding.vdVideoView.start()
                 Toast.makeText(this, "！", Toast.LENGTH_SHORT).show()
             },
@@ -67,8 +68,7 @@ class VideoDetailActivity : AppCompatActivity(), MavericksView {
 
     override fun onDestroy() {
         super.onDestroy()
-        binding.vdVideoView.stop()
-        binding.vdVideoView.release()
+        binding.vdVideoView.stopPlay()
     }
 
     private fun setVideoOpenInfo(data: Int?, tvHomeVideoOwner: TextView) {
@@ -77,6 +77,27 @@ class VideoDetailActivity : AppCompatActivity(), MavericksView {
         }else{
             tvHomeVideoOwner.text = data.toString()
         }
+    }
+
+    override fun onBackPressed() {
+        if(binding.vdVideoView.isFullScreen){
+            binding.vdVideoView.setChangeScreen(false)
+        }else super.onBackPressed()
+    }
+
+    override fun onPause() {
+        super.onPause()
+        binding.vdVideoView.pause()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        binding.vdVideoView.start()
+    }
+
+    override fun onKeyDown(keyCode: Int, event: KeyEvent?): Boolean {
+        var b: Boolean = binding.vdVideoView.onKeyDown(keyCode)
+        return b || super.onKeyDown(keyCode, event)
     }
 
 }
