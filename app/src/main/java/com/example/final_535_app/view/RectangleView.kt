@@ -58,7 +58,7 @@ class RectangleView @JvmOverloads constructor(
         paint.isAntiAlias = true
         canvas.drawARGB(0, 0, 0, 0)
         paint.color = color
-        val x = bitmap.width
+//        val x = bitmap.width
         canvas.drawRoundRect(rectF, roundPx.toFloat(), roundPx.toFloat(), paint)
         paint.xfermode = PorterDuffXfermode(PorterDuff.Mode.SRC_IN)
         canvas.drawBitmap(bitmap, rect, rect, paint)

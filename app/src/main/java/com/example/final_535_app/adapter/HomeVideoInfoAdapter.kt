@@ -10,6 +10,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.example.final_535_app.R
 import com.example.final_535_app.activity.MessageActivity
+import com.example.final_535_app.activity.VideoDetailActivity
 import com.example.final_535_app.databinding.RecyclerviewItemHomeVideoInfoBinding
 import com.example.final_535_app.model.BiliBiliVideo
 import java.text.DecimalFormat
@@ -52,9 +53,10 @@ class HomeVideoInfoAdapter(val videoInfoList: MutableList<BiliBiliVideo>): Recyc
             setVideoOpenInfo(data.view, binding.tvHomeVideoOpenCount)
             setVideoOpenInfo(data.share, binding.tvHomeVideoShare)
 
+            // 跳转到视频详情页
             binding.cvVideoInfoItem.setOnClickListener{
                 var bvid = data.bvid
-                context.startActivity(Intent(context, MessageActivity::class.java).putExtra("bvid",bvid))
+                context.startActivity(Intent(context, VideoDetailActivity::class.java).putExtra("bvid",bvid))
             }
 
         }

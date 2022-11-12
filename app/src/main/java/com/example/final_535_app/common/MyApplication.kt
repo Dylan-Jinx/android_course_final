@@ -1,9 +1,7 @@
 package com.example.final_535_app.common
 
 import android.app.Application
-import android.os.Looper
 import android.util.Log
-import android.widget.Toast
 import com.airbnb.mvrx.Mavericks
 import java.lang.Thread.UncaughtExceptionHandler
 
