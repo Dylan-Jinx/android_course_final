@@ -26,4 +26,7 @@ interface ApiService {
     @GET("/bilibiliVideo/getVideoIntro")
     suspend fun getVideoInfo(@Query("pageNum") pageNum: Number,@Query("pageSize") pageSize: Number) : ApiResponse<PageDataModel<BiliBiliVideo>>
 
+    @GET("/bilibiliVideo/getBannerImageUrl")
+    suspend fun getVideoBanner(): ApiResponse<MutableList<String>>
+
 }

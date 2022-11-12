@@ -8,5 +8,6 @@ import com.example.final_535_app.model.BiliBiliVideo
 import com.example.final_535_app.model.PageDataModel
 
 data class HomeState(
-    val biliBiliVideo: Async<ApiResponse<PageDataModel<BiliBiliVideo>>> = Uninitialized
+    val biliBiliVideo: Async<ApiResponse<PageDataModel<BiliBiliVideo>>> = Uninitialized,
+    val bannerUrls: Async<ApiResponse<MutableList<String>>> = Uninitialized
 ): MavericksState

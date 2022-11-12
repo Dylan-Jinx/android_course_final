@@ -30,7 +30,7 @@ class RectangleView @JvmOverloads constructor(
         val drawable = drawable
         if (null != drawable) {
             val bitmap = (drawable as BitmapDrawable).bitmap
-            val b = getRoundBitmap(bitmap, 30)
+            val b = getRoundBitmap(bitmap, 15)
             val rectSrc = Rect(0, 0, b.width, b.height)
             val rectDest = Rect(0, 0, width, height)
             paint.reset()

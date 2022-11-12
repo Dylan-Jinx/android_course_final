@@ -49,9 +49,6 @@ class MineFragment : Fragment(R.layout.fragment_mine), MavericksView {
             binding.llMyUnlogin.isVisible = true
         }
     }
-    override fun onResume() {
-        super.onResume()
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
