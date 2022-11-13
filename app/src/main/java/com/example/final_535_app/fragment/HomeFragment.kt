@@ -63,6 +63,7 @@ class HomeFragment : Fragment(R.layout.fragment_home), MavericksView{
         var gridLayoutManager = GridLayoutManager(binding.root.context,2)
         binding.rcHomeVideoInfo.layoutManager = gridLayoutManager
         var homeVideoInfoAdapter = state.biliBiliVideo.invoke()?.data?.records?.let { it1 -> HomeVideoInfoAdapter(it1) }
+        homeVideoInfoAdapter?.setEmptyViewLayout(binding.root.context, R.layout.error_no_data)
         binding.rcHomeVideoInfo.adapter = homeVideoInfoAdapter
 
         if(!binding.homeRefreshVideoInfo.state.isFooter){
