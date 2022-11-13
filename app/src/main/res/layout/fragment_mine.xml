@@ -384,6 +384,7 @@
                         android:text="创作首页"/>
                 </LinearLayout>
                 <LinearLayout
+                    android:id="@+id/my_draft"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="vertical"

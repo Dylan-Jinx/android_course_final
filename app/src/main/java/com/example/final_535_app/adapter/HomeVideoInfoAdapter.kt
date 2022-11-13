@@ -1,5 +1,6 @@
 package com.example.final_535_app.adapter
 
+import android.content.Context
 import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -8,6 +9,7 @@ import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
+import com.chad.library.adapter.base.BaseQuickAdapter
 import com.example.final_535_app.R
 import com.example.final_535_app.activity.MessageActivity
 import com.example.final_535_app.activity.VideoDetailActivity
@@ -15,28 +17,12 @@ import com.example.final_535_app.databinding.RecyclerviewItemHomeVideoInfoBindin
 import com.example.final_535_app.model.BiliBiliVideo
 import java.text.DecimalFormat
 
-class HomeVideoInfoAdapter(val videoInfoList: MutableList<BiliBiliVideo>): RecyclerView.Adapter<HomeVideoInfoAdapter.HomeVideoInfoViewHolder>() {
+class HomeVideoInfoAdapter(val videoInfoList: MutableList<BiliBiliVideo>): BaseQuickAdapter<BiliBiliVideo, HomeVideoInfoAdapter.HomeVideoInfoViewHolder>() {
 
     lateinit var binding: RecyclerviewItemHomeVideoInfoBinding
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HomeVideoInfoViewHolder {
-        binding = RecyclerviewItemHomeVideoInfoBinding.inflate(
-            LayoutInflater.from(parent.context),
-            parent,
-            false
-        )
-        return HomeVideoInfoViewHolder(binding)
-    }
 
-    override fun getItemViewType(position: Int): Int {
-        return R.layout.recyclerview_item_home_video_info
-    }
-
-    override fun onBindViewHolder(holder: HomeVideoInfoViewHolder, position: Int) {
-        holder.bindData(videoInfoList[position])
-    }
-
-    override fun getItemCount(): Int = videoInfoList.size
-
+    override fun getItemCount(items: List<BiliBiliVideo>): Int = videoInfoList.size
+    
     inner class HomeVideoInfoViewHolder(
         binding: RecyclerviewItemHomeVideoInfoBinding
     ):RecyclerView.ViewHolder(binding.root){
@@ -68,5 +54,26 @@ class HomeVideoInfoAdapter(val videoInfoList: MutableList<BiliBiliVideo>): Recyc
                 tvHomeVideoOwner.text = data.toString()
             }
         }
+    }
+
+    override fun onBindViewHolder(
+        holder: HomeVideoInfoViewHolder,
+        position: Int,
+        item: BiliBiliVideo?
+    ) {
+        holder.bindData(videoInfoList[position])
+    }
+
+    override fun onCreateViewHolder(
+        context: Context,
+        parent: ViewGroup,
+        viewType: Int
+    ): HomeVideoInfoViewHolder {
+        binding = RecyclerviewItemHomeVideoInfoBinding.inflate(
+            LayoutInflater.from(parent.context),
+            parent,
+            false
+        )
+        return HomeVideoInfoViewHolder(binding)
     }
 }

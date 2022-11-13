@@ -94,5 +94,10 @@
     <string name="VideoView_player_IjkMediaPlayer">Player: IjkMediaPlayer</string>
     <string name="VideoView_player_IjkExoMediaPlayer">Player: IjkExoMediaPlayer</string>
     <string name="title_activity_datacenter">数据中心</string>
+    <string name="title_activity_my_video">MyVideoActivity</string>
+    <string name="tab_text_1">视频</string>
+    <string name="tab_text_2">专栏</string>
+    <string name="tab_text_3">音频</string>
+    <string name="title_my_video">稿件管理</string>
 
 </resources>

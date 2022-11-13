@@ -28,7 +28,10 @@
         <item name="android:windowFullscreen">true</item>
     </style>
 
-    <style name="Theme.MyFinal.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+    <style name="Theme.MyFinal.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
+        <item name="colorPrimary">@color/white</item>
+    </style>
 
     <style name="Theme.MyFinal.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
 </resources>
