@@ -16,6 +16,7 @@ import com.airbnb.mvrx.fragmentViewModel
 import com.airbnb.mvrx.withState
 import com.bumptech.glide.Glide
 import com.example.final_535_app.R
+import com.example.final_535_app.activity.ChartActivity
 import com.example.final_535_app.activity.LoginActivity
 import com.example.final_535_app.databinding.FragmentMineBinding
 import com.example.final_535_app.model.BilibiliUserInfo
@@ -71,8 +72,10 @@ class MineFragment : Fragment(R.layout.fragment_mine), MavericksView {
 
     private fun initEvent() {
         binding.tvMyLogin.setOnClickListener{
-            var intent = Intent(context, LoginActivity::class.java)
-            startActivity(intent)
+            startActivity(Intent(context, LoginActivity::class.java))
+        }
+        binding.createIndex.setOnClickListener{
+            startActivity(Intent(context, ChartActivity::class.java))
         }
         mineViewModel.onAsync(
             MineState:: userInfo,
