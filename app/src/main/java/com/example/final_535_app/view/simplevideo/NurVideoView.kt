@@ -65,6 +65,7 @@ class NurVideoView @JvmOverloads constructor(
         volumeControl!!.id = ID_VOLUME_CONTROL
         mScreenView!!.setOnClickListener(this)
         mScreenView!!.id = ID_SCREEN_VIEW
+
     }
 
     fun setVideoTransitionName(transitionName: String?) {
@@ -274,6 +275,10 @@ class NurVideoView @JvmOverloads constructor(
      */
     val mediaPlayer: IMediaPlayer?
         get() = mVideoView!!.mediaPlayer
+
+    fun onBackPressClickListener(onClickListener: OnClickListener){
+        mVideoView?.setOnBackPressListener(onClickListener)
+    }
 
     /**
      * 更改全（单）屏

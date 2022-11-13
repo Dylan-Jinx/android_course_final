@@ -39,6 +39,7 @@
             android:layout_height="40dp"
             android:background="?attr/selectableItemBackgroundBorderless"
             android:padding="12dp"
+            android:clickable="true"
             android:src="@drawable/nur_ic_back" />
 
         <TextView
@@ -145,14 +146,10 @@
 
     <ImageView
         android:id="@+id/nur_video_centerPlayBtn"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        android:background="@drawable/simple_video_border_radius"
-        android:paddingLeft="4dp"
-        android:paddingTop="16dp"
-        android:paddingBottom="16dp"
-        android:src="@drawable/nur_ic_play" />
+        android:src="@drawable/ic_tv_play" />
 
     <LinearLayout
         android:id="@+id/nur_videoSeekBarBox"

@@ -32,4 +32,7 @@ interface ApiService {
     @GET("/bilibiliVideo/findVideoDetailByBV")
     suspend fun getVideoDetail(@Query("bv") bv:String): ApiResponse<BiliBiliVideo>
 
+    @GET("/bilibiliVideo/findInfoByLikeName")
+    suspend fun getVideoInfoByNameBlurSearch(@Query("findInfoByLikeName") filterName:String): ApiResponse<MutableList<BiliBiliVideo>>
+
 }

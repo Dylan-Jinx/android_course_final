@@ -24,14 +24,6 @@ import tv.danmaku.ijk.media.player.IMediaPlayer
 import tv.danmaku.ijk.media.player.IjkMediaPlayer
 import java.util.*
 
-/**
- * Created by Nurmemet on 2020/4/9
- * Email: nur01@qq.com
- * qq:643229571
- *
- *
- * ijkPlayer的封装
- */
 class NurVideoPlayer @JvmOverloads constructor(
     private val mContext: Context,
     @Nullable attrs: AttributeSet? = null,
@@ -166,6 +158,7 @@ class NurVideoPlayer @JvmOverloads constructor(
         mPlayBtn?.setOnClickListener(this)
         screenView?.setOnClickListener(this)
         mVideoSeekBar?.setOnClickListener(this)
+        mBackIv?.setOnClickListener(this)
         mVolumeControl = findViewById(R.id.nur_video_volumeControl)
         mVolumeSeekBar = findViewById(R.id.nur_volumeSeekBar)
         volumeIcon = findViewById(R.id.nur_video_volumeIcon)
@@ -183,9 +176,6 @@ class NurVideoPlayer @JvmOverloads constructor(
      */
     val backIv: View?
         get() = mBackIv
-    /**
-     * 小广告view
-     */
     /**
      * 小广告view
      */
@@ -276,6 +266,8 @@ class NurVideoPlayer @JvmOverloads constructor(
     }
 
     override fun onClick(v: View) {
+        Toast.makeText(context, ""+v.id, Toast.LENGTH_SHORT).show()
+        Toast.makeText(context, ""+onBackPressListener, Toast.LENGTH_SHORT).show()
         val id = v.id
         if (id == R.id.nur_video_centerPlayBtn) {
             start()
@@ -293,8 +285,6 @@ class NurVideoPlayer @JvmOverloads constructor(
         } else if (id == R.id.nur_video_backIv) {
             if (onBackPressListener != null) {
                 onBackPressListener!!.onClick(v)
-                Toast.makeText(context,"234215",Toast.LENGTH_SHORT)
-                    .show()
             }
         }
     }
@@ -326,9 +316,6 @@ class NurVideoPlayer @JvmOverloads constructor(
     fun setTitle(title: String?) {
         mTitleView!!.text = title
     }
-    /**
-     * 开始播放
-     */
     /**
      * 开始播放
      */

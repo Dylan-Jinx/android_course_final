@@ -26,7 +26,10 @@ class VideoDetailActivity : AppCompatActivity(), MavericksView {
 
         var datas = intent.getStringExtra("bvid")
         datas?.let { videoDetailViewModel.getVideoDetail(it) }
-        Toast.makeText(this, "视频bv为：$datas", Toast.LENGTH_SHORT).show()
+
+        binding.vdVideoView.onBackPressClickListener{
+            onBackPressed()
+        }
 
         videoDetailViewModel.onAsync(
             VideoDetailState::videoDetail,

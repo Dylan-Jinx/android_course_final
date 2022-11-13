@@ -52,7 +52,7 @@
             app:tint="#999999"
             android:layout_marginLeft="10dp"
             android:layout_gravity="center_vertical"
-            android:src="@drawable/letter"/>
+            android:src="@drawable/ic_navigation_header_notification"/>
     </LinearLayout>
 
     <com.scwang.smart.refresh.layout.SmartRefreshLayout
