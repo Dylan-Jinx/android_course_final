@@ -1,26 +1,21 @@
 package com.example.final_535_app.activity
 
-import android.net.Uri
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.KeyEvent
 import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import com.airbnb.mvrx.MavericksView
 import com.airbnb.mvrx.viewModel
 import com.airbnb.mvrx.withState
 import com.bumptech.glide.Glide
 import com.example.final_535_app.common.DownloadControl
-import com.example.final_535_app.common.DownloadControl.initOkDownload
 import com.example.final_535_app.databinding.ActivityVideoDetailBinding
 import com.example.final_535_app.db.DBInjection
-import com.example.final_535_app.db.DownloadInfoDB
 import com.example.final_535_app.db.model.DownloadInfoModel
 import com.example.final_535_app.state.VideoDetailState
 import com.example.final_535_app.utils.DownloadUtil.getRootDir
 import com.example.final_535_app.viewmodel.VideoDetailViewModel
-import com.liulishuo.okdownload.DownloadListener
 import com.liulishuo.okdownload.DownloadTask
 import com.liulishuo.okdownload.core.Util
 import com.liulishuo.okdownload.core.cause.EndCause
@@ -29,7 +24,6 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import java.lang.Exception
 import java.text.DecimalFormat
 
 class VideoDetailActivity : AppCompatActivity(), MavericksView {
@@ -44,24 +38,49 @@ class VideoDetailActivity : AppCompatActivity(), MavericksView {
         var datas = intent.getStringExtra("bvid")
         datas?.let { videoDetailViewModel.getVideoDetail(it) }
         Util.enableConsoleLog()
-
-        initOkDownload(this)
         binding.vdVideoView.onBackPressClickListener{
             onBackPressed()
         }
 
-        videoDetailViewModel.onAsync(
-            VideoDetailState::videoDetail,
-            deliveryMode = uniqueOnly(),
-            onSuccess = {
-                invalidate()
-                it.data?.videoUrl?.let { it1 -> binding.vdVideoView.setUp(this, it1) }
-                binding.vdVideoView.start()
-            },
-            onFail = {
-                Toast.makeText(this, "发生未知错误", Toast.LENGTH_SHORT).show()
+        GlobalScope.launch {
+            withContext(Dispatchers.IO) {
+                var dbInstance = DBInjection.provideDownloadInfoDataSource(this@VideoDetailActivity)
+                var r = dbInstance.getAllLocalDownloadInfo()
+                withContext(Dispatchers.Main){
+                    Toast.makeText(this@VideoDetailActivity, ""+r.size, Toast.LENGTH_SHORT).show()
+                }
             }
-        )
+        }
+
+        var isLocalVideo = intent.getBooleanExtra("local",false)
+        if(!isLocalVideo){
+            videoDetailViewModel.onAsync(
+                VideoDetailState::videoDetail,
+                deliveryMode = uniqueOnly(),
+                onSuccess = {
+                    invalidate()
+                    it.data?.videoUrl?.let { it1 -> binding.vdVideoView.setUp(this, it1) }
+                    binding.vdVideoView.start()
+                },
+                onFail = {
+                    Toast.makeText(this, "发生未知错误", Toast.LENGTH_SHORT).show()
+                }
+            )
+        }else{
+            var bvid_local = intent.getStringExtra("bvid_local")
+            GlobalScope.launch {
+                withContext(Dispatchers.IO){
+                    var dbInstance = DBInjection.provideDownloadInfoDataSource(this@VideoDetailActivity)
+                    var result  = bvid_local?.let { dbInstance.getDownloadInfoById(it) }
+                    withContext(Dispatchers.Main.immediate){
+                        binding.vdVideoView.setUp(this@VideoDetailActivity, getRootDir(this@VideoDetailActivity, "mp4").toString()+"/"+result?.fileName)
+                        binding.vdVideoView.start()
+                        Toast.makeText(this@VideoDetailActivity, ""+result, Toast.LENGTH_SHORT).show()
+                    }
+                }
+            }
+        }
+        intent.putExtra("local", false)
     }
 
     override fun invalidate() = withState(videoDetailViewModel){
@@ -87,43 +106,35 @@ class VideoDetailActivity : AppCompatActivity(), MavericksView {
 
 
         binding.btnVideodetailCache.setOnClickListener{
-            val downLoadVideo: String? = videoInfo?.videoUrl
-
             var task = DownloadControl.createTask(
-                url = videoInfo?.videoUrl.toString(), getRootDir(this, "mp4").toString(),videoInfo?.title.toString()
+                url = videoInfo?.videoUrl.toString(), getRootDir(this, "mp4").toString(),videoInfo?.title.toString()+".mp4"
             )
 
+            var db_fileName = getRootDir(this, "mp4").toString()+""+videoInfo?.title.toString()+".mp4"
             GlobalScope.launch {
                 withContext(Dispatchers.IO){
-                    task?.execute(object: DownloadListener2(){
+                    var dbInstance = DBInjection.provideDownloadInfoDataSource(this@VideoDetailActivity)
+                    dbInstance.insertDownloadInfo(DownloadInfoModel(
+                        bid = videoInfo?.bvid.toString(),
+                        fileName = videoInfo?.title.toString(),
+                        path = db_fileName
+                    ))
+                }
+            }
+            GlobalScope.launch {
+                withContext(Dispatchers.IO){
+                    task?.execute(object :DownloadListener2(){
                         override fun taskStart(task: DownloadTask) {
-                            Log.d("TAG", "taskStart: "+task)
+//                                Toast.makeText(this@VideoDetailActivity, "开始下载", Toast.LENGTH_SHORT).show()
                         }
 
                         override fun taskEnd(task: DownloadTask, cause: EndCause, realCause: Exception?) {
-                            Log.d("TAG", "taskEnd: "+cause+" // "+ realCause)
+//                            Toast.makeText(this@VideoDetailActivity, "下载完成", Toast.LENGTH_SHORT).show()
                         }
                     })
+
                 }
             }
-
-
-
-//            GlobalScope.launch {
-//                withContext(Dispatchers.IO){
-//                    var dbInstance = DBInjection.provideDownloadInfoDataSource(this@VideoDetailActivity)
-//                    var dx = dbInstance.insertDownloadInfo(
-//                        DownloadInfoModel(
-//                            fileName = videoInfo?.title,
-//                            bid = videoInfo?.bvid)
-//                    )
-//                    var result  = dbInstance.getDownloadInfoById(videoInfo?.bvid.toString())
-//                    withContext(Dispatchers.Main){
-//                        Toast.makeText(this@VideoDetailActivity, "正在下载中"+ result, Toast.LENGTH_SHORT).show()
-//                    }
-//                }
-//            }
-
         }
 
         return@withState
@@ -145,7 +156,10 @@ class VideoDetailActivity : AppCompatActivity(), MavericksView {
     override fun onBackPressed() {
         if(binding.vdVideoView.isFullScreen){
             binding.vdVideoView.setChangeScreen(false)
-        }else super.onBackPressed()
+        }else{
+            super.onBackPressed()
+            finish()
+        }
     }
 
     override fun onPause() {

@@ -19,6 +19,7 @@ import com.liulishuo.okdownload.core.file.ProcessFileStrategy
 object DownloadControl {
 
     fun initOkDownload(context: Context){
+
         var builder = OkDownload.Builder(context)
             .downloadStore(Util.createDefaultDatabase(context))
             .callbackDispatcher(CallbackDispatcher())//监听回调监视器
