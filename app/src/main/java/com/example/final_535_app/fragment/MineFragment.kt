@@ -18,10 +18,7 @@ import com.airbnb.mvrx.fragmentViewModel
 import com.airbnb.mvrx.withState
 import com.bumptech.glide.Glide
 import com.example.final_535_app.R
-import com.example.final_535_app.activity.ChartActivity
-import com.example.final_535_app.activity.LoginActivity
-import com.example.final_535_app.activity.MapActivity
-import com.example.final_535_app.activity.MyVideoActivity
+import com.example.final_535_app.activity.*
 import com.example.final_535_app.databinding.FragmentMineBinding
 import com.example.final_535_app.model.BilibiliUserInfo
 import com.example.final_535_app.state.MineState
@@ -87,6 +84,9 @@ class MineFragment : Fragment(R.layout.fragment_mine), MavericksView {
         }
         binding.llMap.setOnClickListener{
             startActivity(Intent(context, MapActivity::class.java))
+        }
+        binding.llMineLocalCache.setOnClickListener{
+            startActivity(Intent(context, LocalDownloadActivity::class.java))
         }
         mineViewModel.onAsync(
             MineState:: userInfo,

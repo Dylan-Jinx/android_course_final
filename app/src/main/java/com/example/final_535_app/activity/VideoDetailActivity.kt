@@ -2,6 +2,7 @@ package com.example.final_535_app.activity
 
 import android.os.Bundle
 import android.view.KeyEvent
+import android.view.View
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -24,6 +25,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import java.io.File
 import java.text.DecimalFormat
 
 class VideoDetailActivity : AppCompatActivity(), MavericksView {
@@ -35,25 +37,25 @@ class VideoDetailActivity : AppCompatActivity(), MavericksView {
         binding = ActivityVideoDetailBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        var datas = intent.getStringExtra("bvid")
-        datas?.let { videoDetailViewModel.getVideoDetail(it) }
         Util.enableConsoleLog()
         binding.vdVideoView.onBackPressClickListener{
             onBackPressed()
         }
 
-        GlobalScope.launch {
-            withContext(Dispatchers.IO) {
-                var dbInstance = DBInjection.provideDownloadInfoDataSource(this@VideoDetailActivity)
-                var r = dbInstance.getAllLocalDownloadInfo()
-                withContext(Dispatchers.Main){
-                    Toast.makeText(this@VideoDetailActivity, ""+r.size, Toast.LENGTH_SHORT).show()
-                }
-            }
-        }
+//        GlobalScope.launch{
+//            withContext(Dispatchers.IO){
+//                var dbInstance = DBInjection.provideDownloadInfoDataSource(this@VideoDetailActivity)
+//                dbInstance.deleteAllInfo()
+//                var x = dbInstance.getAllLocalDownloadInfo()
+//                Toast.makeText(this@VideoDetailActivity, ""+x.size, Toast.LENGTH_SHORT).show()
+//            }
+//        }
 
         var isLocalVideo = intent.getBooleanExtra("local",false)
+        // 不是本地
         if(!isLocalVideo){
+            var datas = intent.getStringExtra("bvid")
+            datas?.let { videoDetailViewModel.getVideoDetail(it) }
             videoDetailViewModel.onAsync(
                 VideoDetailState::videoDetail,
                 deliveryMode = uniqueOnly(),
@@ -66,16 +68,20 @@ class VideoDetailActivity : AppCompatActivity(), MavericksView {
                     Toast.makeText(this, "发生未知错误", Toast.LENGTH_SHORT).show()
                 }
             )
-        }else{
+        }
+        //是本地
+        else{
+            binding.llVideoInfo.visibility = View.INVISIBLE
+            binding.llBtnCache.visibility = View.INVISIBLE
+            binding.llVideoOwner.visibility = View.INVISIBLE
             var bvid_local = intent.getStringExtra("bvid_local")
             GlobalScope.launch {
                 withContext(Dispatchers.IO){
                     var dbInstance = DBInjection.provideDownloadInfoDataSource(this@VideoDetailActivity)
                     var result  = bvid_local?.let { dbInstance.getDownloadInfoById(it) }
                     withContext(Dispatchers.Main.immediate){
-                        binding.vdVideoView.setUp(this@VideoDetailActivity, getRootDir(this@VideoDetailActivity, "mp4").toString()+"/"+result?.fileName)
+                        binding.vdVideoView.setUp(this@VideoDetailActivity, getRootDir(this@VideoDetailActivity, "mp4").toString()+"/"+result?.fileName+".mp4")
                         binding.vdVideoView.start()
-                        Toast.makeText(this@VideoDetailActivity, ""+result, Toast.LENGTH_SHORT).show()
                     }
                 }
             }
@@ -106,33 +112,57 @@ class VideoDetailActivity : AppCompatActivity(), MavericksView {
 
 
         binding.btnVideodetailCache.setOnClickListener{
-            var task = DownloadControl.createTask(
+            var videoTask = DownloadControl.createTask(
                 url = videoInfo?.videoUrl.toString(), getRootDir(this, "mp4").toString(),videoInfo?.title.toString()+".mp4"
             )
 
-            var db_fileName = getRootDir(this, "mp4").toString()+""+videoInfo?.title.toString()+".mp4"
+            var img_fileName = getRootDir(this, "mp4").toString()+File.separator+videoInfo?.bvid.toString()+".png"
+            var imageTask = DownloadControl.createTask(
+                url = videoInfo?.pic.toString(), getRootDir(this, "mp4").toString(),videoInfo?.bvid.toString()+".png"
+            )
+
+            // 下载视频
             GlobalScope.launch {
                 withContext(Dispatchers.IO){
-                    var dbInstance = DBInjection.provideDownloadInfoDataSource(this@VideoDetailActivity)
-                    dbInstance.insertDownloadInfo(DownloadInfoModel(
-                        bid = videoInfo?.bvid.toString(),
-                        fileName = videoInfo?.title.toString(),
-                        path = db_fileName
-                    ))
-                }
-            }
-            GlobalScope.launch {
-                withContext(Dispatchers.IO){
-                    task?.execute(object :DownloadListener2(){
+                    videoTask?.execute(object :DownloadListener2(){
                         override fun taskStart(task: DownloadTask) {
-//                                Toast.makeText(this@VideoDetailActivity, "开始下载", Toast.LENGTH_SHORT).show()
                         }
 
                         override fun taskEnd(task: DownloadTask, cause: EndCause, realCause: Exception?) {
-//                            Toast.makeText(this@VideoDetailActivity, "下载完成", Toast.LENGTH_SHORT).show()
+                            GlobalScope.launch {
+                                withContext(Dispatchers.IO){
+                                    var dbInstance = DBInjection.provideDownloadInfoDataSource(this@VideoDetailActivity)
+                                    dbInstance.insertDownloadInfo(DownloadInfoModel(
+                                        bid = videoInfo?.bvid.toString(),
+                                        fileName = videoInfo?.title,
+                                        path = img_fileName
+                                    ))
+                                }
+                            }
                         }
                     })
 
+                }
+            }
+
+            // 下载封面
+            GlobalScope.launch {
+                withContext(Dispatchers.IO){
+                    imageTask?.execute(object : DownloadListener2() {
+                        override fun taskStart(task: DownloadTask) {
+                            Toast.makeText(this@VideoDetailActivity, "开始下载", Toast.LENGTH_SHORT).show()
+                        }
+
+                        override fun taskEnd(
+                            task: DownloadTask,
+                            cause: EndCause,
+                            realCause: java.lang.Exception?
+                        ) {
+                            Toast.makeText(this@VideoDetailActivity, "下载完成", Toast.LENGTH_SHORT).show()
+
+                        }
+
+                    })
                 }
             }
         }

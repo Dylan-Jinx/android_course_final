@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<shortcuts xmlns:android="http://schemas.android.com/apk/res/android">
+<shortcuts xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
     <shortcut
         android:shortcutId="compose"
         android:enabled="true"
@@ -9,6 +9,19 @@
             android:action="android.intent.action.VIEW"
             android:targetPackage="com.example.final_535_app"
             android:targetClass="com.example.final_535_app.activity.LoginActivity" />
+        <!-- If your shortcut is associated with multiple intents, include them
+             here. The last intent in the list determines what the user sees when
+             they launch this shortcut. -->
+    </shortcut>
+    <shortcut
+        android:shortcutId="local_cache"
+        android:enabled="true"
+        android:icon="@drawable/local_cache_quickboot_icon"
+        android:shortcutShortLabel="@string/title_unline_cache">
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:targetPackage="com.example.final_535_app"
+            android:targetClass="com.example.final_535_app.activity.LocalDownloadActivity" />
         <!-- If your shortcut is associated with multiple intents, include them
              here. The last intent in the list determines what the user sees when
              they launch this shortcut. -->
