@@ -48,7 +48,6 @@ class MainActivity : AppCompatActivity() {
             Manifest.permission.ACCESS_BACKGROUND_LOCATION,
             Manifest.permission.ACCESS_LOCATION_EXTRA_COMMANDS,
                 Manifest.permission.ACCESS_COARSE_LOCATION,
-                Manifest.permission.LOCATION_HARDWARE,
                 Manifest.permission.ACCESS_WIFI_STATE,
                 Manifest.permission.ACCESS_NETWORK_STATE,
                 Manifest.permission.ACCESS_LOCATION_EXTRA_COMMANDS
