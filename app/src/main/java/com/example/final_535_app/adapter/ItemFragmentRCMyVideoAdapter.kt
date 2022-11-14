@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.os.Build
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.annotation.RequiresApi
@@ -29,6 +30,10 @@ class ItemFragmentRCMyVideoAdapter(val datas: MutableList<BiliBiliVideo>):BaseQu
             setVideoOpenInfo(item?.share, binding.tvFgMyvideoShare)
             setVideoOpenInfo(item?.view, binding.tvFgMyvideoView)
             setVideoOpenInfo(item?.coin, binding.tvFgMyvideoFavorite)
+
+            binding.itemFgBtnDatacenter.setOnClickListener {
+                context.startActivity(Intent(context, ChartActivity::class.java).putExtra("data_center_bvid", item?.bvid))
+            }
         }
         private fun setVideoOpenInfo(data: Int?, tvHomeVideoOwner: TextView) {
             if(data!! > 10000){
@@ -45,6 +50,7 @@ class ItemFragmentRCMyVideoAdapter(val datas: MutableList<BiliBiliVideo>):BaseQu
 
     override fun getItemCount(items: List<BiliBiliVideo>): Int = datas.size
 
+
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreateViewHolder(
         context: Context,
@@ -57,9 +63,6 @@ class ItemFragmentRCMyVideoAdapter(val datas: MutableList<BiliBiliVideo>):BaseQu
             false
         )
 
-        binding.itemFgBtnDatacenter.setOnClickListener{
-            context.startActivity(Intent(context, ChartActivity::class.java))
-        }
 
         return IFRCMVAViewHolder(binding)
     }

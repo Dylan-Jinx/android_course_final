@@ -1,35 +1,51 @@
 package com.example.final_535_app.activity
 
+import android.content.Intent
 import android.graphics.Color
 import android.graphics.DashPathEffect
 import android.graphics.Typeface
 import android.os.Build
 import android.os.Bundle
+import android.text.TextUtils
 import android.util.Log
+import android.widget.TextView
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
+import com.airbnb.mvrx.MavericksView
+import com.airbnb.mvrx.viewModel
+import com.airbnb.mvrx.withState
+import com.bumptech.glide.Glide
 import com.example.final_535_app.databinding.ActivityChartBinding
-import com.github.mikephil.charting.components.AxisBase
+import com.example.final_535_app.state.ChartState
+import com.example.final_535_app.viewmodel.ChartViewModel
 import com.github.mikephil.charting.components.Legend
 import com.github.mikephil.charting.components.XAxis
 import com.github.mikephil.charting.data.*
-import com.github.mikephil.charting.formatter.IAxisValueFormatter
-import com.github.mikephil.charting.formatter.ValueFormatter
+import java.text.DecimalFormat
 
 
 @RequiresApi(Build.VERSION_CODES.O)
-class ChartActivity : AppCompatActivity() {
+class ChartActivity : AppCompatActivity(), MavericksView {
 
     lateinit var binding: ActivityChartBinding
+    val chartViewModel: ChartViewModel by viewModel(ChartViewModel::class)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityChartBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
         lineChart(30)
         pieChart()
         radarChart()
+        var bvid = intent.getStringExtra("data_center_bvid")
+        if(!TextUtils.isEmpty(bvid)){
+            bvid?.let { chartViewModel.getVideoDetail(it) }
+            binding.llChartTopVideoInfo.setOnClickListener{
+                startActivity(Intent(this, VideoDetailActivity::class.java).putExtra("bvid",bvid))
+            }
+        }
         initEvent()
     }
 
@@ -109,6 +125,16 @@ class ChartActivity : AppCompatActivity() {
         binding.btnRelateThirty.setOnClickListener{
             lineChart(30)
         }
+        chartViewModel.onAsync(
+            ChartState::biliBiliVideo,
+            deliveryMode = uniqueOnly(),
+            onSuccess = {
+                invalidate()
+            },
+            onFail = {
+                Toast.makeText(this, "网络开小差啦～", Toast.LENGTH_SHORT).show()
+            }
+        )
     }
 
     fun generateFloatNumber(): Float {
@@ -162,7 +188,6 @@ class ChartActivity : AppCompatActivity() {
         var dataObjects = randomOpenTend(dayCount)
         Log.d("TAG", "randomOpenTend: "+dataObjects.size)
         var datas:MutableList<Entry> = ArrayList()
-        Toast.makeText(this, ""+datas.size, Toast.LENGTH_SHORT).show()
         for (dataObject in dataObjects) {
             // turn your data into Entry objects
             datas.add(Entry(dataObject.ValueX.toFloat(), dataObject.ValueY.toFloat()))
@@ -226,4 +251,30 @@ class ChartActivity : AppCompatActivity() {
         val ValueX: Int,
         val ValueY: Int,
     )
+
+    override fun invalidate() = withState(chartViewModel) { state ->
+        val data = state.biliBiliVideo.invoke()?.data
+
+        Glide.with(binding.root.context)
+            .load(data?.pic)
+            .into(binding.rvSearchBanner)
+
+        binding.tvChartVideoTitle.text = data?.title
+        binding.tvChartVideoOpenInfo.text = data?.ctime
+
+        binding.tvDatacenterView.text = data?.view.toString()
+        binding.tvDatacenterCoin.text = data?.coin.toString()
+        binding.tvDatacenterLike.text = data?.like
+        binding.tvDatacenterDankamu.text = data?.danmaku.toString()
+        binding.tvDatacenterCollect.text = data?.favorite.toString()
+        binding.tvDatacenterShare.text = data?.share.toString()
+
+    }
+    private fun setVideoOpenInfo(data: Int?, tvHomeVideoOwner: TextView) {
+        if(data!! > 10000){
+            tvHomeVideoOwner.text = DecimalFormat("0.0").format(data/10000) + " 万"
+        }else{
+            tvHomeVideoOwner.text = data.toString()
+        }
+    }
 }

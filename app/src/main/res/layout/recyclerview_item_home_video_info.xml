@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="210dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="horizontal"
     android:layout_marginTop="10dp">
@@ -20,11 +20,12 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_weight="1"
             android:orientation="vertical">
             <com.example.final_535_app.view.RectangleView
                     android:id="@+id/home_rv_video_brand"
                     android:layout_width="match_parent"
-                    android:layout_height="120dp"
+                    android:layout_height="wrap_content"
                     android:src="@drawable/home_test"/>
             <TextView
                     android:id="@+id/tv_home_video_name"
@@ -38,21 +39,25 @@
                     android:text="湿发李知恩！IU《eight》MV幕后拍摄花絮！中字版！"/>
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:layout_gravity="bottom"
+                android:gravity="bottom"
                 android:orientation="horizontal">
                 <ImageView
                     android:layout_width="20dp"
                     android:layout_height="20dp"
                     android:layout_marginLeft="5dp"
+                    android:gravity="bottom"
                     android:src="@drawable/icon_up"/>
                 <TextView
                     android:id="@+id/tv_home_video_owner"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_marginLeft="5dp"
-                    android:textSize="12sp"/>
+                    android:gravity="center_vertical|bottom"
+                    android:text="23"
+                    android:textSize="14sp"/>
             </LinearLayout>
 
         </LinearLayout>
