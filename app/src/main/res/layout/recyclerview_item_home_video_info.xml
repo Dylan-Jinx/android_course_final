@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="210dp"
+    android:layout_height="200dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="horizontal"
     android:layout_marginTop="10dp">
@@ -25,13 +25,13 @@
             <com.example.final_535_app.view.RectangleView
                     android:id="@+id/home_rv_video_brand"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="120dp"
                     android:src="@drawable/home_test"/>
             <TextView
                     android:id="@+id/tv_home_video_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="14dp"
+                    android:textSize="14sp"
                     android:maxLines="2"
                     android:ellipsize="end"
                     android:layout_margin="5dp"
@@ -74,8 +74,8 @@
                 android:gravity="center_vertical"
                 android:orientation="horizontal">
                 <ImageView
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
                     android:textColor="@color/white"
                     app:tint="#fff"
                     android:src="@drawable/video"/>
@@ -83,7 +83,7 @@
                     android:id="@+id/tv_home_video_open_count"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="14dp"
+                    android:textSize="14sp"
                     android:layout_marginLeft="5dp"
                     android:textColor="@color/white"
                     />
@@ -106,7 +106,7 @@
                     android:id="@+id/tv_home_video_share"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="14dp"
+                    android:textSize="14sp"
                     android:layout_marginLeft="5dp"
                     android:textColor="@color/white"
                     />

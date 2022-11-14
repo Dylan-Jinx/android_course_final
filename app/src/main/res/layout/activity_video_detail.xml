@@ -7,17 +7,13 @@
     android:orientation="vertical"
     android:padding="10dp"
     tools:context=".activity.VideoDetailActivity">
-
-<!--    <com.example.final_535_app.IjkplayerVideoView-->
-<!--        android:id="@+id/vd_video_view"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="220dp"/>-->
     <com.example.final_535_app.view.simplevideo.NurVideoView
         android:id="@+id/vd_video_view"
         android:layout_width="match_parent"
         app:video_view_height="220dp"
         android:layout_height="match_parent">
         <!--播放器下面的UI写在这里-->
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="60dp"
@@ -58,7 +54,7 @@
                 android:layout_marginLeft="100dp"
                 android:background="@drawable/video_focus_button_style"
                 android:text="+   关注"
-                android:textSize="16dp"
+                android:textSize="16sp"
                 android:textColor="@color/white"
                 android:textStyle="bold"
                 />
@@ -79,7 +75,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
                 <ImageView
                     android:layout_width="24dp"
                     android:layout_height="24dp"
@@ -89,6 +86,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="14sp"
+                    android:text="7.0万"
                     android:layout_marginLeft="10dp"
                     />
 
@@ -112,6 +110,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
+                    android:text="7.0万"
                     android:textSize="14sp"
                     />
             </LinearLayout>
@@ -217,8 +216,17 @@
             </LinearLayout>
 
         </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="40dp">
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="缓存"/>
+        </LinearLayout>
 
     </com.example.final_535_app.view.simplevideo.NurVideoView>
+
 
 
 </LinearLayout>

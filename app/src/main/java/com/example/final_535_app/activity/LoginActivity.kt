@@ -58,16 +58,17 @@ class LoginActivity : AppCompatActivity(),MavericksView {
             LoginState::loginInfo,
             deliveryMode = uniqueOnly(),
             onSuccess = {
-                if(TextUtils.isEmpty(it.data?.mid.toString())){
-                    Toast.makeText(this, "账号或密码错误", Toast.LENGTH_SHORT).show()
-                }else{
+                if(it.code == 0){
                     val sharedPreferences = getSharedPreferences("user", MODE_PRIVATE)
                     var editor = sharedPreferences.edit();
                     it.data?.mid?.let { it1 -> editor.putInt("mid", it1) };
                     editor.commit();
                     startActivity(Intent(this,MainActivity::class.java))
                     finish()
+                }else{
+                    Toast.makeText(this, "账号或密码错误", Toast.LENGTH_SHORT).show()
                 }
+
             },onFail = {
                 Toast.makeText(this, "网络异常", Toast.LENGTH_SHORT).show()
             }

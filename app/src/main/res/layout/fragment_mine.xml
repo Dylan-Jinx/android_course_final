@@ -80,7 +80,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text=""
-                        android:textSize="18dp"
+                        android:textSize="22sp"
                         android:textFontWeight="700"
                         android:textColor="@color/app_theme_color_fade"/>
                     <ImageView
@@ -112,6 +112,7 @@
                     android:id="@+id/tv_my_coininfo"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:textSize="14sp"
                     android:text="B币：0.0   硬币：1364"/>
             </LinearLayout>
             <LinearLayout
@@ -155,10 +156,10 @@
                     android:text="23"
                     android:textColor="@color/black"
                     android:layout_gravity="center_horizontal"
-                    android:textSize="18dp"/>
+                    android:textSize="18sp"/>
                 <TextView
                     android:text="动态"
-                    android:textSize="14dp"
+                    android:textSize="14sp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" android:layout_gravity="center_horizontal"
                     />
@@ -182,10 +183,10 @@
                     android:text="23"
                     android:textColor="@color/black"
                     android:layout_gravity="center_horizontal"
-                    android:textSize="18dp"/>
+                    android:textSize="18sp"/>
                 <TextView
                     android:text="关注"
-                    android:textSize="14dp"
+                    android:textSize="14sp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" android:layout_gravity="center_horizontal"
                     />
@@ -209,10 +210,10 @@
                     android:text="23"
                     android:textColor="@color/black"
                     android:layout_gravity="center_horizontal"
-                    android:textSize="18dp"/>
+                    android:textSize="18sp"/>
                 <TextView
                     android:text="粉丝"
-                    android:textSize="14dp"
+                    android:textSize="14sp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" android:layout_gravity="center_horizontal"
                     />
@@ -229,7 +230,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="校园先锋"
-                android:textSize="16dp"
+                android:textSize="16sp"
                 android:textColor="@color/white"
                 android:layout_marginLeft="10dp"
                 android:textStyle="bold"/>
@@ -237,7 +238,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="明理精工，与时偕行"
-                android:textSize="14dp"
+                android:textSize="14sp"
                 android:layout_marginLeft="10dp"
                 android:textColor="@color/white"/>
         </LinearLayout>
@@ -406,6 +407,7 @@
                         android:text="稿件管理"/>
                 </LinearLayout>
                 <LinearLayout
+                    android:id="@+id/ll_map"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="vertical"
@@ -424,7 +426,7 @@
                         android:layout_weight="1"
                         android:textColor="@color/black"
                         android:textSize="16sp"
-                        android:text="创作激励"/>
+                        android:text="地图"/>
                 </LinearLayout>
                 <LinearLayout
                     android:layout_width="match_parent"

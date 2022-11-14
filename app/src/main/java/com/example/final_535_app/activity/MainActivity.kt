@@ -1,14 +1,18 @@
 package com.example.final_535_app.activity
 
 import android.Manifest
-import android.app.Activity
+import android.content.DialogInterface
+import android.content.Intent
 import android.content.pm.PackageManager
-import android.os.Build
+import android.content.pm.PackageManager.PERMISSION_DENIED
+import android.content.pm.PackageManager.PERMISSION_GRANTED
+import android.net.Uri
 import android.os.Bundle
-import android.os.PersistableBundle
-import android.util.Log
+import android.provider.Settings.ACTION_APPLICATION_DETAILS_SETTINGS
 import android.view.KeyEvent
 import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
@@ -17,10 +21,10 @@ import androidx.navigation.Navigation
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.NavigationUI
 import com.example.final_535_app.R
-import com.example.final_535_app.base.BaseActivity
 import com.example.final_535_app.common.OnFragmentKeyDownListener
-import com.example.final_535_app.utils.PermissionRequestUtils.verifyStoragePermissions
+import com.example.final_535_app.utils.PermissionUtils.bestPermissionX
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.permissionx.guolindev.PermissionX
 
 class MainActivity : AppCompatActivity() {
 
@@ -34,13 +38,16 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         initView()
 
-        var flag = ActivityCompat.shouldShowRequestPermissionRationale(this,
-        Manifest.permission.WRITE_EXTERNAL_STORAGE)
-        if (!flag){
-            ActivityCompat.requestPermissions(this,
-                arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE),1);
-        }
+        bestPermissionX(PermissionX.init(this),
+            arrayListOf(Manifest.permission.ACCESS_FINE_LOCATION,
+                Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                Manifest.permission.READ_EXTERNAL_STORAGE,
+            Manifest.permission.ACCESS_BACKGROUND_LOCATION,
+            Manifest.permission.ACCESS_LOCATION_EXTRA_COMMANDS)
+        ,this)
+
     }
+
     fun initView() {
         var navView: BottomNavigationView = findViewById(R.id.nav_view);
         appbarConfiguration = AppBarConfiguration.Builder(
