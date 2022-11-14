@@ -13,6 +13,9 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        ndk {
+            abiFilters 'armeabi', 'armeabi-v7a', 'arm64-v8a'
+        }
     }
     buildFeatures {
         viewBinding true
@@ -27,11 +30,6 @@ android {
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_11
         targetCompatibility JavaVersion.VERSION_11
-    }
-    sourceSets {
-        main {
-            jniLibs.srcDirs = ['jniLibs']
-        }
     }
 }
 dependencies {
@@ -127,8 +125,17 @@ dependencies {
     kapt("androidx.room:room-compiler:2.4.3")
     kapt("androidx.room:room-compiler-processing:2.4.3")
 
+    //viewpager2配合
+    // 视频播放器相关依赖库
+    implementation 'com.shuyu:gsyVideoPlayer-java:8.0.0'
+    implementation 'com.shuyu:gsyVideoPlayer-armv5:8.0.0'
+    implementation 'com.shuyu:gsyVideoPlayer-armv7a:8.0.0'
+    implementation 'com.shuyu:gsyVideoPlayer-arm64:8.0.0'
 
 
+    // ButterKnife
+    implementation 'com.jakewharton:butterknife:10.2.1'
+    kapt 'com.jakewharton:butterknife-compiler:10.2.1'
 
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
