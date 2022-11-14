@@ -2,8 +2,10 @@ package com.example.final_535_app.activity
 
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.amap.api.location.AMapLocation
+import com.amap.api.location.AMapLocationClient
 import com.amap.api.maps2d.AMap
 import com.amap.api.maps2d.CameraUpdateFactory
 import com.amap.api.maps2d.LocationSource
@@ -22,6 +24,8 @@ class MapActivity : AppCompatActivity(), LocationSource {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_map)
+        AMapLocationClient.updatePrivacyShow(this, true, true)
+        AMapLocationClient.updatePrivacyAgree(this, true)
         mapView = findViewById<View>(R.id.map) as MapView
         mapView!!.onCreate(savedInstanceState)
         init()
@@ -50,7 +54,6 @@ class MapActivity : AppCompatActivity(), LocationSource {
                 lgt: Double,
                 aMapLocation: AMapLocation?
             ) {
-
                 //根据获取的经纬度，将地图移动到定位位置
                 aMap!!.moveCamera(CameraUpdateFactory.changeLatLng(LatLng(lat, lgt)))
                 mListener?.onLocationChanged(aMapLocation)

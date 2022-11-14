@@ -22,9 +22,9 @@ class LocationUtil: AMapLocationListener {
         aMapLocationClient!!.setLocationListener(this)
         //初始化定位参数
         clientOption = AMapLocationClientOption()
-        clientOption!!.locationMode = AMapLocationClientOption.AMapLocationMode.Hight_Accuracy
+        clientOption!!.locationMode = AMapLocationClientOption.AMapLocationMode.Battery_Saving
         clientOption!!.isNeedAddress = true
-        clientOption!!.isOnceLocation = false
+        clientOption!!.isOnceLocation = true
         //设置是否强制刷新WIFI，默认为强制刷新
         clientOption!!.isWifiActiveScan = true
         //设置是否允许模拟位置,默认为false，不允许模拟位置
@@ -34,6 +34,7 @@ class LocationUtil: AMapLocationListener {
         aMapLocationClient!!.setLocationOption(clientOption)
 
         aMapLocationClient!!.startLocation()
+        Toast.makeText(context, "定位初始化成功", Toast.LENGTH_SHORT).show()
     }
 
     //完成定位回调
@@ -61,7 +62,6 @@ class LocationUtil: AMapLocationListener {
                             + aMapLocation.errorCode + ", errInfo:"
                             + aMapLocation.errorInfo
                 )
-
             }
         }
     }
