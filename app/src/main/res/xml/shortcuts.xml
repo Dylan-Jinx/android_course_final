@@ -4,11 +4,11 @@
         android:shortcutId="compose"
         android:enabled="true"
         android:icon="@drawable/icon"
-        android:shortcutShortLabel="@string/nav_mine">
+        android:shortcutShortLabel="@string/title_map">
         <intent
             android:action="android.intent.action.VIEW"
             android:targetPackage="com.example.final_535_app"
-            android:targetClass="com.example.final_535_app.activity.LoginActivity" />
+            android:targetClass="com.example.final_535_app.activity.MapActivity" />
         <!-- If your shortcut is associated with multiple intents, include them
              here. The last intent in the list determines what the user sees when
              they launch this shortcut. -->

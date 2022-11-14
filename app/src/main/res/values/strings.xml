@@ -100,5 +100,6 @@
     <string name="tab_text_3">音频</string>
     <string name="title_my_video">稿件管理</string>
     <string name="title_unline_cache">离线缓存</string>
+    <string name="title_map">地图</string>
 
 </resources>

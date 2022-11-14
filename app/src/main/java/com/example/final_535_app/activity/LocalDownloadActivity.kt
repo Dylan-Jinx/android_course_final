@@ -27,15 +27,6 @@ class LocalDownloadActivity : AppCompatActivity() {
         setContentView(binding.root)
         binding.rcLocalCache.layoutManager = LinearLayoutManager(this)
         initEvent()
-}
-
-    private fun initEvent() {
-        binding.ivLocalCacheBack.setOnClickListener{
-            onBackPressed()
-        }
-    }
-
-    override fun onResume() {
         var instance = DBInjection.provideDownloadInfoDataSource(this)
         GlobalScope.launch {
             withContext(Dispatchers.IO){
@@ -54,7 +45,12 @@ class LocalDownloadActivity : AppCompatActivity() {
                 binding.rcLocalCache.adapter = localAdapter
             }
         }
-        super.onResume()
+    }
+
+    private fun initEvent() {
+        binding.ivLocalCacheBack.setOnClickListener{
+            onBackPressed()
+        }
     }
 
     override fun onBackPressed() {

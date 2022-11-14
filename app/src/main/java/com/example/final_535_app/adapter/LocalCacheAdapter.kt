@@ -1,5 +1,6 @@
 package com.example.final_535_app.adapter
 
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.graphics.drawable.Drawable
@@ -52,7 +53,6 @@ class LocalCacheAdapter(var data: List<DownloadInfoModel>):
                     .putExtra("local", true)
                     .putExtra("bvid_local", downloadInfoModel.bid)
                 context.startActivity(intent)
-                Toast.makeText(binding.root.context, ""+downloadInfoModel, Toast.LENGTH_SHORT).show()
             }
         }
     }
