@@ -22,15 +22,15 @@ class LocationUtil: AMapLocationListener {
         aMapLocationClient!!.setLocationListener(this)
         //初始化定位参数
         clientOption = AMapLocationClientOption()
-        clientOption!!.locationMode = AMapLocationClientOption.AMapLocationMode.Battery_Saving
+        clientOption!!.locationMode = AMapLocationClientOption.AMapLocationMode.Hight_Accuracy
         clientOption!!.isNeedAddress = true
-        clientOption!!.isOnceLocation = true
+        clientOption!!.isOnceLocation = false
         //设置是否强制刷新WIFI，默认为强制刷新
         clientOption!!.isWifiActiveScan = true
         //设置是否允许模拟位置,默认为false，不允许模拟位置
         clientOption!!.isMockEnable = false
         //设置定位间隔
-        clientOption!!.interval = 2000
+        clientOption!!.interval = 3000*10*10
         aMapLocationClient!!.setLocationOption(clientOption)
 
         aMapLocationClient!!.startLocation()
