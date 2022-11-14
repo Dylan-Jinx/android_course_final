@@ -3,6 +3,7 @@ package com.example.final_535_app.activity
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.KeyEvent
 import android.widget.TextView
 import android.widget.Toast
@@ -10,9 +11,25 @@ import com.airbnb.mvrx.MavericksView
 import com.airbnb.mvrx.viewModel
 import com.airbnb.mvrx.withState
 import com.bumptech.glide.Glide
+import com.example.final_535_app.common.DownloadControl
+import com.example.final_535_app.common.DownloadControl.initOkDownload
 import com.example.final_535_app.databinding.ActivityVideoDetailBinding
+import com.example.final_535_app.db.DBInjection
+import com.example.final_535_app.db.DownloadInfoDB
+import com.example.final_535_app.db.model.DownloadInfoModel
 import com.example.final_535_app.state.VideoDetailState
+import com.example.final_535_app.utils.DownloadUtil.getRootDir
 import com.example.final_535_app.viewmodel.VideoDetailViewModel
+import com.liulishuo.okdownload.DownloadListener
+import com.liulishuo.okdownload.DownloadTask
+import com.liulishuo.okdownload.core.Util
+import com.liulishuo.okdownload.core.cause.EndCause
+import com.liulishuo.okdownload.core.listener.DownloadListener2
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+import java.lang.Exception
 import java.text.DecimalFormat
 
 class VideoDetailActivity : AppCompatActivity(), MavericksView {
@@ -26,7 +43,9 @@ class VideoDetailActivity : AppCompatActivity(), MavericksView {
 
         var datas = intent.getStringExtra("bvid")
         datas?.let { videoDetailViewModel.getVideoDetail(it) }
+        Util.enableConsoleLog()
 
+        initOkDownload(this)
         binding.vdVideoView.onBackPressClickListener{
             onBackPressed()
         }
@@ -38,7 +57,6 @@ class VideoDetailActivity : AppCompatActivity(), MavericksView {
                 invalidate()
                 it.data?.videoUrl?.let { it1 -> binding.vdVideoView.setUp(this, it1) }
                 binding.vdVideoView.start()
-                Toast.makeText(this, "！", Toast.LENGTH_SHORT).show()
             },
             onFail = {
                 Toast.makeText(this, "发生未知错误", Toast.LENGTH_SHORT).show()
@@ -65,6 +83,48 @@ class VideoDetailActivity : AppCompatActivity(), MavericksView {
         setVideoOpenInfo(videoInfo?.coin, binding.tvVideoCoin)
         setVideoOpenInfo(videoInfo?.favorite, binding.tvVideoCollect)
         setVideoOpenInfo(videoInfo?.share, binding.tvVideoShare)
+
+
+
+        binding.btnVideodetailCache.setOnClickListener{
+            val downLoadVideo: String? = videoInfo?.videoUrl
+
+            var task = DownloadControl.createTask(
+                url = videoInfo?.videoUrl.toString(), getRootDir(this, "mp4").toString(),videoInfo?.title.toString()
+            )
+
+            GlobalScope.launch {
+                withContext(Dispatchers.IO){
+                    task?.execute(object: DownloadListener2(){
+                        override fun taskStart(task: DownloadTask) {
+                            Log.d("TAG", "taskStart: "+task)
+                        }
+
+                        override fun taskEnd(task: DownloadTask, cause: EndCause, realCause: Exception?) {
+                            Log.d("TAG", "taskEnd: "+cause+" // "+ realCause)
+                        }
+                    })
+                }
+            }
+
+
+
+//            GlobalScope.launch {
+//                withContext(Dispatchers.IO){
+//                    var dbInstance = DBInjection.provideDownloadInfoDataSource(this@VideoDetailActivity)
+//                    var dx = dbInstance.insertDownloadInfo(
+//                        DownloadInfoModel(
+//                            fileName = videoInfo?.title,
+//                            bid = videoInfo?.bvid)
+//                    )
+//                    var result  = dbInstance.getDownloadInfoById(videoInfo?.bvid.toString())
+//                    withContext(Dispatchers.Main){
+//                        Toast.makeText(this@VideoDetailActivity, "正在下载中"+ result, Toast.LENGTH_SHORT).show()
+//                    }
+//                }
+//            }
+
+        }
 
         return@withState
     }
