@@ -16,6 +16,7 @@ import com.airbnb.mvrx.withState
 import com.example.final_535_app.R
 import com.example.final_535_app.activity.MessageActivity
 import com.example.final_535_app.activity.SearchActivity
+import com.example.final_535_app.activity.ViewPagerVideoActivity
 import com.example.final_535_app.adapter.HomeBannerAdapter
 import com.example.final_535_app.adapter.HomeVideoInfoAdapter
 import com.example.final_535_app.databinding.FragmentHomeBinding
@@ -47,6 +48,10 @@ class HomeFragment : Fragment(R.layout.fragment_home), MavericksView{
         // 跳转信息页面
         binding.ivMyMessage.setOnClickListener{
             startActivity(Intent(context, MessageActivity::class.java))
+        }
+        // 跳转viewpager视频
+        binding.homeViewpagerVideo.setOnClickListener{
+            startActivity(Intent(context, ViewPagerVideoActivity::class.java))
         }
         //上拉刷新与下拉刷新
         binding.homeRefreshVideoInfo.setOnRefreshListener{
