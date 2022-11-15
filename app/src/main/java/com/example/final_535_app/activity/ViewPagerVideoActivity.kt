@@ -76,6 +76,11 @@ class ViewPagerVideoActivity : AppCompatActivity(), MavericksView {
         }
     }
 
+    override fun onPause() {
+        super.onPause()
+        GSYVideoManager.releaseAllVideos()
+    }
+
     override fun invalidate() = withState(videoViewModel){ state ->
 
     }
