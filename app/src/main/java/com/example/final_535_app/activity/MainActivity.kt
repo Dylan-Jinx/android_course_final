@@ -10,6 +10,7 @@ import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.provider.Settings.ACTION_APPLICATION_DETAILS_SETTINGS
+import android.util.Log
 import android.view.KeyEvent
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
@@ -24,9 +25,15 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.NavigationUI
 import com.example.final_535_app.R
 import com.example.final_535_app.common.OnFragmentKeyDownListener
+import com.example.final_535_app.msgpush.MQTTHelper
+import com.example.final_535_app.msgpush.Qos
+import com.example.final_535_app.msgpush.Topic
 import com.example.final_535_app.utils.PermissionUtils.bestPermissionX
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.permissionx.guolindev.PermissionX
+import org.eclipse.paho.client.mqttv3.IMqttDeliveryToken
+import org.eclipse.paho.client.mqttv3.MqttCallback
+import org.eclipse.paho.client.mqttv3.MqttMessage
 
 class MainActivity : AppCompatActivity() {
 
@@ -54,6 +61,26 @@ class MainActivity : AppCompatActivity() {
             )
         ,this)
 
+
+        //推送功能核心代码
+
+        val server = "tcp://192.168.123.52:1879" //服务端地址
+        val mqttHelper = MQTTHelper(this,server,"admin","public")
+        mqttHelper.connect(Topic.TOPIC_MSG, Qos.QOS_TWO,false,object : MqttCallback {
+            override fun connectionLost(cause: Throwable?) {
+
+            }
+
+            override fun messageArrived(topic: String?, message: MqttMessage?) {
+                //收到消息
+                Toast.makeText(this@MainActivity, ""+ String(message?.payload!!), Toast.LENGTH_SHORT).show()
+                message?.payload?.let { String(it) }?.let { Log.d("消息", it) }
+            }
+
+            override fun deliveryComplete(token: IMqttDeliveryToken?) {
+
+            }
+        })
     }
 
     fun initView() {
@@ -91,5 +118,6 @@ class MainActivity : AppCompatActivity() {
         }
         return super.onKeyDown(keyCode, event)
     }
+
 
 }

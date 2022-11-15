@@ -8,6 +8,7 @@
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM"/>
     <uses-permission
         android:name="android.permission.WRITE_EXTERNAL_STORAGE"
         tools:ignore="ScopedStorage" /> <!-- 在sdcard中创建/删除文件的权限 -->
@@ -45,12 +46,6 @@
         <activity
             android:name=".activity.ViewPagerVideoActivity"
             android:exported="true">
-<!--            <intent-filter>-->
-<!--                <action android:name="android.intent.action.MAIN" />-->
-
-<!--                <category android:name="android.intent.category.LAUNCHER" />-->
-<!--            </intent-filter>-->
-
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
@@ -58,14 +53,6 @@
         <activity
             android:name=".activity.LocalDownloadActivity"
             android:exported="true">
-
-            <!-- <intent-filter> -->
-            <!-- <action android:name="android.intent.action.MAIN" /> -->
-
-
-            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
-            <!-- </intent-filter> -->
-
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
@@ -76,6 +63,8 @@
             android:icon="@drawable/logo"
             android:roundIcon="@drawable/icon" />
 
+        <service android:name="com.itfitness.mqttlibrary.MqttService"/>
+
         <meta-data
             android:name="com.amap.api.v2.apikey"
             android:value="ad82f35e58e39b2cb602caa86ec935e4" />
@@ -83,11 +72,6 @@
         <activity
             android:name=".activity.MapActivity"
             android:exported="true">
-
-            <!-- <intent-filter> -->
-            <!-- <action android:name="android.intent.action.MAIN" /> -->
-            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
-            <!-- </intent-filter> -->
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />

@@ -132,10 +132,12 @@ dependencies {
     implementation 'com.shuyu:gsyVideoPlayer-armv7a:8.0.0'
     implementation 'com.shuyu:gsyVideoPlayer-arm64:8.0.0'
 
-
     // ButterKnife
     implementation 'com.jakewharton:butterknife:10.2.1'
     kapt 'com.jakewharton:butterknife-compiler:10.2.1'
+
+    //msg push
+    implementation 'com.github.itfitness:MQTTAndroid:1.0.0'
 
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
