@@ -1,24 +1,22 @@
 package com.example.final_535_app.activity
 
 import android.Manifest
-import android.content.DialogInterface
+import android.app.Activity
+import android.app.Notification
+import android.app.NotificationChannel
+import android.app.NotificationManager
+import android.app.PendingIntent
+import android.content.Context
 import android.content.Intent
-import android.content.pm.PackageManager
-import android.content.pm.PackageManager.PERMISSION_DENIED
-import android.content.pm.PackageManager.PERMISSION_GRANTED
-import android.net.Uri
+import android.graphics.BitmapFactory
 import android.os.Build
 import android.os.Bundle
-import android.provider.Settings.ACTION_APPLICATION_DETAILS_SETTINGS
 import android.util.Log
 import android.view.KeyEvent
 import android.widget.Toast
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.RequiresApi
-import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat
+import androidx.core.app.NotificationCompat
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.navigation.ui.AppBarConfiguration
@@ -28,12 +26,15 @@ import com.example.final_535_app.common.OnFragmentKeyDownListener
 import com.example.final_535_app.msgpush.MQTTHelper
 import com.example.final_535_app.msgpush.Qos
 import com.example.final_535_app.msgpush.Topic
+import com.example.final_535_app.utils.NotificationUtil
 import com.example.final_535_app.utils.PermissionUtils.bestPermissionX
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.permissionx.guolindev.PermissionX
 import org.eclipse.paho.client.mqttv3.IMqttDeliveryToken
 import org.eclipse.paho.client.mqttv3.MqttCallback
 import org.eclipse.paho.client.mqttv3.MqttMessage
+import kotlin.random.Random
+
 
 class MainActivity : AppCompatActivity() {
 
@@ -57,30 +58,10 @@ class MainActivity : AppCompatActivity() {
                 Manifest.permission.ACCESS_COARSE_LOCATION,
                 Manifest.permission.ACCESS_WIFI_STATE,
                 Manifest.permission.ACCESS_NETWORK_STATE,
-                Manifest.permission.ACCESS_LOCATION_EXTRA_COMMANDS
+                Manifest.permission.ACCESS_LOCATION_EXTRA_COMMANDS,
+                Manifest.permission.ACCESS_NOTIFICATION_POLICY
             )
         ,this)
-
-
-        //推送功能核心代码
-
-        val server = "tcp://192.168.123.52:1879" //服务端地址
-        val mqttHelper = MQTTHelper(this,server,"admin","public")
-        mqttHelper.connect(Topic.TOPIC_MSG, Qos.QOS_TWO,false,object : MqttCallback {
-            override fun connectionLost(cause: Throwable?) {
-
-            }
-
-            override fun messageArrived(topic: String?, message: MqttMessage?) {
-                //收到消息
-                Toast.makeText(this@MainActivity, ""+ String(message?.payload!!), Toast.LENGTH_SHORT).show()
-                message?.payload?.let { String(it) }?.let { Log.d("消息", it) }
-            }
-
-            override fun deliveryComplete(token: IMqttDeliveryToken?) {
-
-            }
-        })
     }
 
     fun initView() {
