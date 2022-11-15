@@ -10,6 +10,7 @@ import android.os.Build
 import android.util.Log
 import androidx.core.app.NotificationCompat
 import com.example.final_535_app.R
+import com.example.final_535_app.activity.InfoArticleActivity
 import com.example.final_535_app.activity.MainActivity
 import com.example.final_535_app.msgpush.SendMessageObject
 import com.google.gson.Gson
@@ -32,8 +33,13 @@ object NotificationUtil {
         } else {
             NotificationCompat.Builder(context)
         }
-        val intent = Intent(context, MainActivity::class.java)
-        intent.putExtra("msgContent", dataObj.param)
+        // 判断通知是否跳咨询页
+        var intent = Intent(context, MainActivity::class.java)
+        if(dataObj.pageState){
+            intent = Intent(context, InfoArticleActivity::class.java)
+            intent.putExtra("info_id", dataObj.param)
+        }
+
         //2.创建通知实例
         val notification: Notification = builder
             .setContentTitle(dataObj.title)

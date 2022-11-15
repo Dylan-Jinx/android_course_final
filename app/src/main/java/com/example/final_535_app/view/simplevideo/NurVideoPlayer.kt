@@ -17,6 +17,7 @@ import androidx.annotation.ColorInt
 import androidx.annotation.Nullable
 import com.example.final_535_app.R
 import com.example.final_535_app.common.Settings
+import com.example.final_535_app.view.media.IMediaController
 import com.example.final_535_app.view.media.IjkVideoView
 import com.example.final_535_app.view.simplevideo.listener.OnMediaListener
 import com.nurmemet.nur.nurvideoplayer.SimpleVideoOnTouch
@@ -266,8 +267,6 @@ class NurVideoPlayer @JvmOverloads constructor(
     }
 
     override fun onClick(v: View) {
-        Toast.makeText(context, ""+v.id, Toast.LENGTH_SHORT).show()
-        Toast.makeText(context, ""+onBackPressListener, Toast.LENGTH_SHORT).show()
         val id = v.id
         if (id == R.id.nur_video_centerPlayBtn) {
             start()
@@ -715,7 +714,7 @@ class NurVideoPlayer @JvmOverloads constructor(
         mVideoView!!.setOnPreparedListener(preparedListener)
         mVideoView!!.setOnErrorListener(IMediaPlayer.OnErrorListener { mp, what, extra ->
             if (what == -10000) {
-                Toast.makeText(mContext, "网路未连接，请检查网络设置", Toast.LENGTH_SHORT).show()
+                Toast.makeText(mContext, "网络未连接，请检查网络设置", Toast.LENGTH_SHORT).show()
                 pause()
                 return@OnErrorListener true
             }
