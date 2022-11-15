@@ -12,6 +12,7 @@ import androidx.core.app.NotificationCompat
 import com.example.final_535_app.R
 import com.example.final_535_app.activity.InfoArticleActivity
 import com.example.final_535_app.activity.MainActivity
+import com.example.final_535_app.activity.SelfWebViewActivity
 import com.example.final_535_app.msgpush.SendMessageObject
 import com.google.gson.Gson
 import kotlin.random.Random
@@ -38,6 +39,13 @@ object NotificationUtil {
         if(dataObj.pageState){
             intent = Intent(context, InfoArticleActivity::class.java)
             intent.putExtra("info_id", dataObj.param)
+        }else{
+            if (dataObj.param.equals("-1")){
+                intent = Intent(context, MainActivity::class.java)
+            }else{
+                intent = Intent(context, SelfWebViewActivity::class.java)
+                intent.putExtra("url", dataObj.param)
+            }
         }
 
         //2.创建通知实例

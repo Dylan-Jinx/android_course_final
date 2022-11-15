@@ -102,5 +102,6 @@
     <string name="title_unline_cache">离线缓存</string>
     <string name="title_map">地图</string>
     <string name="title_note_detail">笔记详情</string>
+    <string name="title_activity_web">活动页面</string>
 
 </resources>
