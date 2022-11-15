@@ -2,6 +2,7 @@ package com.example.final_535_app.msgpush
 
 import android.content.Context
 import android.util.Log
+import android.widget.Toast
 import com.itfitness.mqttlibrary.MqttAndroidClient
 import org.eclipse.paho.client.mqttv3.*
 import java.util.UUID
@@ -13,7 +14,7 @@ class MQTTHelper {
 
     constructor(context: Context, serverUrl:String, name:String, pass:String){
         val deviceId = UUID.randomUUID().toString()
-        mqttClient = MqttAndroidClient(context, "tcp://192.168.123.52:1879", "myAndroid"
+        mqttClient = MqttAndroidClient(context, serverUrl, "myAndroid"
         )
         connectOptions = MqttConnectOptions().apply {
             isCleanSession = false

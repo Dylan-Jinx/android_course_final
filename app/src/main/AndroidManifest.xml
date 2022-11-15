@@ -8,7 +8,7 @@
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM"/>
+    <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM" />
     <uses-permission
         android:name="android.permission.WRITE_EXTERNAL_STORAGE"
         tools:ignore="ScopedStorage" /> <!-- 在sdcard中创建/删除文件的权限 -->
@@ -44,6 +44,19 @@
         tools:replace="label"
         tools:targetApi="31">
         <activity
+            android:name=".activity.BubbleActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".activity.ViewPagerVideoActivity"
             android:exported="true">
             <meta-data
@@ -62,8 +75,7 @@
             android:foregroundServiceType="location"
             android:icon="@drawable/logo"
             android:roundIcon="@drawable/icon" />
-
-        <service android:name="com.itfitness.mqttlibrary.MqttService"/>
+        <service android:name="com.itfitness.mqttlibrary.MqttService" />
 
         <meta-data
             android:name="com.amap.api.v2.apikey"
