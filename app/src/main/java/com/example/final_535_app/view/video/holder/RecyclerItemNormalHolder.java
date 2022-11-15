@@ -32,16 +32,24 @@ public class RecyclerItemNormalHolder extends RecyclerItemBaseHolder {
     SampleCoverVideo gsyVideoPlayer;
     @BindView(R.id.tv_content)
     TextView tvContent;
-
     @BindView(R.id.user_photo_view)
     CircleImageView circleImageView;
-
     @BindView(R.id.tv_author)
     TextView tvAuthor;
+
+    @BindView(R.id.page_video_thumb_count)
+    TextView thumbCount;
+    @BindView(R.id.video_comment)
+    TextView commentCount;
+    @BindView(R.id.tv_page_share)
+    TextView shareCount;
+    @BindView(R.id.tv_desc)
+    TextView desc;
 
     ImageView imageView;
 
     GSYVideoOptionBuilder gsyVideoOptionBuilder;
+
 
     public RecyclerItemNormalHolder(Context context, View v) {
         super(v);
@@ -56,10 +64,15 @@ public class RecyclerItemNormalHolder extends RecyclerItemBaseHolder {
         String videoUrl = videoModel.getVideoUrl();
         String textContent = videoModel.getTitle();
 
+        // 页面基本参数设置
         Glide.with(context).load(videoModel.getPic()).into(imageView);
         Glide.with(context).load(videoModel.getOwnerFace()).into(circleImageView);
         tvAuthor.setText(videoModel.getOwnerName());
         tvContent.setText(" " + textContent);
+        thumbCount.setText(videoModel.getLike());
+        commentCount.setText(videoModel.getDanmaku().toString());
+        shareCount.setText(videoModel.getShare().toString());
+        desc.setText(videoModel.getDesc());
 
 
         Map<String, String> header = new HashMap<>();

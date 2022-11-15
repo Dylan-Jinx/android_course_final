@@ -49,9 +49,11 @@
             <ImageView
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:src="@drawable/icon_like" />
+                app:tint="#fff"
+                android:src="@drawable/thumb_up" />
 
             <TextView
+                android:id="@+id/page_video_thumb_count"
                 android:layout_width="40dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="2dp"
@@ -76,6 +78,7 @@
                 android:src="@drawable/icon_news" />
 
             <TextView
+                android:id="@+id/video_comment"
                 android:layout_width="40dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="2dp"
@@ -97,9 +100,11 @@
             <ImageView
                 android:layout_width="35dp"
                 android:layout_height="35dp"
-                android:src="@drawable/icon_forward" />
+                app:tint="#fff"
+                android:src="@drawable/share" />
 
             <TextView
+                android:id="@+id/tv_page_share"
                 android:layout_width="40dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="2dp"
@@ -127,7 +132,7 @@
             android:layout_height="wrap_content"
             android:ellipsize="end"
             android:maxEms="20"
-            android:text=" @_彼岸雨敲窗_"
+            android:text=" 23232"
             android:textColor="@color/white"
             android:textSize="18sp"
             android:textStyle="bold" />
@@ -139,7 +144,18 @@
             android:layout_marginTop="8dp"
             android:ellipsize="end"
             android:maxEms="200"
-            android:text="愿你出走半生，归来仍是少年。"
+            android:text="232323"
+            android:textColor="@color/white"
+            android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/tv_desc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:ellipsize="end"
+            android:maxEms="200"
+            android:text="232323"
             android:textColor="@color/white"
             android:textSize="15sp" />
 
