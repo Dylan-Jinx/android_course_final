@@ -17,7 +17,6 @@ import androidx.annotation.ColorInt
 import androidx.annotation.Nullable
 import com.example.final_535_app.R
 import com.example.final_535_app.common.Settings
-import com.example.final_535_app.view.media.IMediaController
 import com.example.final_535_app.view.media.IjkVideoView
 import com.example.final_535_app.view.simplevideo.listener.OnMediaListener
 import com.nurmemet.nur.nurvideoplayer.SimpleVideoOnTouch
@@ -25,7 +24,7 @@ import tv.danmaku.ijk.media.player.IMediaPlayer
 import tv.danmaku.ijk.media.player.IjkMediaPlayer
 import java.util.*
 
-class NurVideoPlayer @JvmOverloads constructor(
+class JinxVideoPlayer @JvmOverloads constructor(
     private val mContext: Context,
     @Nullable attrs: AttributeSet? = null,
     defStyleAttr: Int = 0
@@ -231,7 +230,7 @@ class NurVideoPlayer @JvmOverloads constructor(
         if (playing) {
             if (oldDuration == progress && videoMaxDuration != progress) {
                 mProgressBar!!.visibility = VISIBLE
-                mUiHandler.postDelayed(mUiRunnable, 50)
+                mUiHandler.postDelayed(mUiRunnable, 1000)
                 return
             } else {
                 thumbImageView!!.visibility = GONE
@@ -240,6 +239,7 @@ class NurVideoPlayer @JvmOverloads constructor(
             }
         }
         oldDuration = progress
+
         if (!isTouchProgress) {
             mVideoDurationTv!!.text = stringForTime(progress)
             mVideoSeekBar!!.progress = progress
@@ -258,7 +258,7 @@ class NurVideoPlayer @JvmOverloads constructor(
                 mCenterPlayBtn!!.visibility = INVISIBLE
                 mPlayBtn?.change(false)
             }
-            mUiHandler.postDelayed(mUiRunnable, 50)
+            mUiHandler.postDelayed(mUiRunnable, 1000)
         } else {
             mCenterPlayBtn!!.visibility = VISIBLE
             mPlayBtn?.change(true)
@@ -329,7 +329,10 @@ class NurVideoPlayer @JvmOverloads constructor(
         mVideoView!!.start()
         autoDismiss()
         mUiHandler.removeCallbacks(mUiRunnable)
-        mUiHandler.postDelayed(mUiRunnable, 50)
+        mUiHandler.postDelayed(mUiRunnable, 1000)
+        if (mediaListener != null) {
+            mediaListener!!.onPause(false)
+        }
     }
 
     /**
@@ -342,7 +345,7 @@ class NurVideoPlayer @JvmOverloads constructor(
         mPlayBtn?.change(true)
         mVideoView!!.pause()
         if (mediaListener != null) {
-            mediaListener!!.onPause()
+            mediaListener!!.onPause(true)
         }
     }
 
@@ -360,7 +363,7 @@ class NurVideoPlayer @JvmOverloads constructor(
                 mVideoMaxLenTv!!.text = stringForTime(videoMaxDuration)
                 mProgressBar!!.visibility = INVISIBLE
 
-                mUiHandler.postDelayed(mUiRunnable, 50)
+                mUiHandler.postDelayed(mUiRunnable, 1000)
             }
         }
 

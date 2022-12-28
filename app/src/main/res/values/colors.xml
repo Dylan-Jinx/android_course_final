@@ -34,4 +34,9 @@
     <color name="ijk_transparent_dark">#77000000</color>
     <color name="create_theme">#FFC107</color>
 
+    <color name="incoming">#FBE9E7</color>
+    <color name="outgoing">#EEEEEE</color>
+
+
+
 </resources>

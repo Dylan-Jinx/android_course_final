@@ -38,4 +38,7 @@ interface ApiService {
     @GET("/noteInfo/getInfoByInfoId")
     suspend fun getArticleInfo(@Query("id")id: Int): ApiResponse<NoteInfoPageModel>
 
+    @GET("/videoDankamu/getDanKamuByBvid")
+    suspend fun getVideoDankamu(@Query("bvid")bvid: String): ApiResponse<MutableList<Dankamu>>
+
 }

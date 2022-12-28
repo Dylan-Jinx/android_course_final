@@ -26,7 +26,8 @@ object NotificationUtil {
         val notificationManager =
             context.getSystemService(NOTIFICATION_SERVICE) as NotificationManager
         Log.i("TAG", "showNotification:version: " + Build.VERSION.SDK_INT)
-        val builder: NotificationCompat.Builder = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) { //Android 8.0版本适配
+        val builder: NotificationCompat.Builder = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            //Android 8.0版本适配
             val channel =
                 NotificationChannel("default", "default", NotificationManager.IMPORTANCE_HIGH)
             notificationManager.createNotificationChannel(channel)
@@ -53,11 +54,11 @@ object NotificationUtil {
             .setContentTitle(dataObj.title)
             .setContentText(dataObj.content)
             .setWhen(System.currentTimeMillis()) //smallIcon 通知栏显示小图标
-            //android5.0 之后通知栏图标都修改了，小图标不能含有RGB图层，也就是说图片不能带颜色，否则显示的就成白色方格了
+            //android5.0 之后通知栏图标都修改了，小图标不能含有RGB图层，
+            // 也就是说图片不能带颜色，否则显示的就成白色方格了
             //解决方法一:为图片带颜色，targetSdkVersion改为21以下
             //解决方法二:只能用白色透明底的图片
             .setSmallIcon(R.drawable.icon)
-            //LargeIcon 下拉后显示的图标
             .setLargeIcon(
                 BitmapFactory.decodeResource(
                     Resources.getSystem(),
@@ -67,8 +68,7 @@ object NotificationUtil {
             .setStyle(NotificationCompat.BigTextStyle().bigText(dataObj.content))
             .setPriority(NotificationCompat.PRIORITY_DEFAULT)
             .setForegroundServiceBehavior(NotificationCompat.FOREGROUND_SERVICE_IMMEDIATE)
-            .setBadgeIconType(NotificationCompat.BADGE_ICON_LARGE)
-            //收到通知时的效果，这里是默认声音
+            .setBadgeIconType(NotificationCompat.BADGE_ICON_LARGE) //收到通知时的效果，这里是默认声音
             .setDefaults(Notification.DEFAULT_SOUND)
             .setAutoCancel(true)
             .setContentIntent(

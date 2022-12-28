@@ -46,7 +46,8 @@ class LoginActivity : AppCompatActivity(),MavericksView {
         }else{
             group.removeView(imageView)
             imageView = ImageView(baseContext)
-            val bitmap = PicUtil.activityShot(this@LoginActivity)?.let { PicUtil.rsBlur(baseContext, it,25) }
+            val bitmap = PicUtil.activityShot(this@LoginActivity)
+                ?.let { PicUtil.rsBlur(baseContext, it,25) }
             imageView.setImageBitmap(bitmap);
             group.addView(imageView);
         }

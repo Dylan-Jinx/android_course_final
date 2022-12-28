@@ -1,14 +1,24 @@
 package com.example.final_535_app.adapter
 
+import android.R.attr.smallIcon
+import android.app.Notification
+import android.app.PendingIntent
+import android.app.Person
+import android.content.Intent
+import android.graphics.drawable.Icon
+import android.os.Build
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.example.final_535_app.R
 import com.example.final_535_app.databinding.RecyclerviewItemMessageChatBinding
 import com.example.final_535_app.model.BilibiliUserInfo
+import com.liulishuo.okdownload.OkDownloadProvider.context
 import kotlinx.coroutines.*
+
 
 class MessageChatAdapter(val messageList: MutableList<BilibiliUserInfo>) : RecyclerView.Adapter<MessageChatAdapter.MessageChatViewHolder>() {
 
@@ -28,7 +38,6 @@ class MessageChatAdapter(val messageList: MutableList<BilibiliUserInfo>) : Recyc
 
     override fun onBindViewHolder(holder: MessageChatViewHolder, position: Int) {
         holder.bindData(messageList[position])
-
     }
 
     override fun getItemCount() = messageList.size

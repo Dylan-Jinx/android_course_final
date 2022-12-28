@@ -12,7 +12,7 @@ interface OnMediaListener {
     /**
      * 暂停播放
      */
-    fun onPause()
+    fun onPause(isPause: Boolean)
 
     /**
      * 播放进度

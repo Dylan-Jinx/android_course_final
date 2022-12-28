@@ -20,7 +20,8 @@ interface DownloadInfoDao {
      * @param downloadInfoModel the user to be inserted.
      */
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertDownloadInfo(downloadInfoModel: DownloadInfoModel): Long
+    fun insertDownloadInfo(
+        downloadInfoModel: DownloadInfoModel): Long
 
     /**
      * Delete single users.

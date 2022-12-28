@@ -61,7 +61,8 @@ object PicUtil {
         // Load up an instance of the specific script that we want to use.
         //创建ScriptIntrinsic
         val scriptIntrinsicBlur =
-            ScriptIntrinsicBlur.create(renderScript, Element.U8_4(renderScript))
+            ScriptIntrinsicBlur
+                .create(renderScript, Element.U8_4(renderScript))
         //(4)//填充数据
         scriptIntrinsicBlur.setInput(input)
         // Set the blur radius

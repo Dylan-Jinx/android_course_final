@@ -8,7 +8,6 @@ import android.widget.ImageView
 
 /**
  * 自定义的圆角矩形ImageView，可以直接当组件在布局中使用。
- * @author se7en
  */
 class RectangleView @JvmOverloads constructor(
     context: Context?,

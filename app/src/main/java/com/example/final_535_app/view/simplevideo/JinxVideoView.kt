@@ -19,13 +19,13 @@ import com.example.final_535_app.view.simplevideo.listener.OnControlClickListene
 import com.example.final_535_app.view.simplevideo.listener.OnMediaListener
 import tv.danmaku.ijk.media.player.IMediaPlayer
 
-class NurVideoView @JvmOverloads constructor(
+class JinxVideoView @JvmOverloads constructor(
     context: Context,
     @Nullable attrs: AttributeSet? = null,
     defStyleAttr: Int = 0
 ) :
     LinearLayout(context, attrs, defStyleAttr), View.OnClickListener {
-    private var mVideoView: NurVideoPlayer? = null
+    private var mVideoView: JinxVideoPlayer? = null
     private var mVideoViewHeight = 0
     private var bgColor = 0
     private var removeBack = false
@@ -49,7 +49,7 @@ class NurVideoView @JvmOverloads constructor(
      * 引入播放器
      */
     private fun initVideoView() {
-        mVideoView = NurVideoPlayer(context)
+        mVideoView = JinxVideoPlayer(context)
         mVideoView!!.setBgColor(bgColor)
         setVideoViewHeight(mVideoViewHeight)
         addView(mVideoView)

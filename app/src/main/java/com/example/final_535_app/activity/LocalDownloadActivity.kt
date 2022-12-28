@@ -34,7 +34,8 @@ class LocalDownloadActivity : AppCompatActivity() {
                 var localAdapter = LocalCacheAdapter(datas)
                 if(datas.isEmpty()){
                     withContext(Dispatchers.Main){
-                        localAdapter.setEmptyViewLayout(this@LocalDownloadActivity, R.layout.error_no_data)
+                        localAdapter.setEmptyViewLayout(this@LocalDownloadActivity,
+                            R.layout.error_no_data)
                         localAdapter.isEmptyViewEnable = true
                     }
                 }else{

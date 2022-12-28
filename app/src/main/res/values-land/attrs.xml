@@ -7,4 +7,6 @@
         <attr name="remove_back_btn" format="boolean" />
     </declare-styleable>
 
+
+    <attr name="editTextStyle" />
 </resources>
