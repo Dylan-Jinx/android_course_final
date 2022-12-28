@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.KeyEvent
 import android.view.View
+import android.widget.RelativeLayout
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -44,8 +45,6 @@ import master.flame.danmaku.danmaku.parser.BaseDanmakuParser
 import master.flame.danmaku.ui.widget.DanmakuView
 import java.io.File
 import java.text.DecimalFormat
-import java.util.TreeMap
-import kotlin.random.Random
 
 
 class VideoDetailActivity : AppCompatActivity(), MavericksView {
@@ -220,7 +219,7 @@ class VideoDetailActivity : AppCompatActivity(), MavericksView {
      * 弹幕是否有边框
      */
     private fun addDanmaku(content: String?, withBorder: Boolean
-    ,textColor: String?,borderColor: String?,) {
+                           ,textColor: String?,borderColor: String?,) {
         val danmaku = danmakuContext?.mDanmakuFactory?.createDanmaku(BaseDanmaku.TYPE_SCROLL_RL)
         danmaku!!.text = content
         danmaku.padding = 5

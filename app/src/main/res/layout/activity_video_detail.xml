@@ -232,5 +232,5 @@
         <master.flame.danmaku.ui.widget.DanmakuView
             android:id="@+id/danmaku_view"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="160dp" />
 </RelativeLayout>
