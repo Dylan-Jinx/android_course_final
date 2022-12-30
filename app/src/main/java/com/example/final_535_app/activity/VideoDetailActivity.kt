@@ -2,6 +2,7 @@ package com.example.final_535_app.activity
 
 import android.graphics.Color
 import android.os.Bundle
+import android.text.TextUtils
 import android.util.Log
 import android.view.KeyEvent
 import android.view.View
@@ -9,6 +10,7 @@ import android.widget.RelativeLayout
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.isVisible
 import com.airbnb.mvrx.MavericksView
 import com.airbnb.mvrx.viewModel
 import com.airbnb.mvrx.withState
@@ -98,7 +100,7 @@ class VideoDetailActivity : AppCompatActivity(), MavericksView {
                     if(dankamu?.isBorder?.equals("1")!!){
                         addDanmaku(dankamu?.content, true, dankamu?.contentColor, dankamu?.borderColor)
                     }else{
-                        addDanmaku(dankamu?.content, true, dankamu?.contentColor, null)
+                        addDanmaku(dankamu?.content, false, dankamu?.contentColor, null)
                     }
                 }
             }
@@ -112,6 +114,31 @@ class VideoDetailActivity : AppCompatActivity(), MavericksView {
             }
 
         })
+
+        binding.btnOpenDankamu.setOnClickListener {
+            if(!binding.danmakuView.isVisible){
+                binding.danmakuView.isVisible = true
+            }
+        }
+
+        binding.btnCloseDankamu.setOnClickListener {
+            if(binding.danmakuView.isVisible){
+                binding.danmakuView.isVisible = false
+            }
+        }
+
+        binding.btnSendDankamu.setOnClickListener {
+            var sendDankamu = binding.etDankamuText.text.toString()
+            if(!TextUtils.isEmpty(sendDankamu)){
+                addDanmaku(
+                    sendDankamu,
+                    false,
+                    "WHITE",
+                    null
+                )
+                binding.etDankamuText.text = null
+            }
+        }
 
 //        GlobalScope.launch{
 //            withContext(Dispatchers.IO){

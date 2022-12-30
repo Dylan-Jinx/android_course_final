@@ -99,7 +99,6 @@
             android:text="0:0"
             android:textColor="@android:color/white" />
 
-
         <ImageView
             android:id="@+id/nur_video_ktvIv"
             android:layout_width="40dp"

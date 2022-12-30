@@ -6,12 +6,58 @@
     android:layout_height="match_parent"
     android:padding="10dp"
     tools:context=".activity.VideoDetailActivity">
-        <com.example.final_535_app.view.simplevideo.JinxVideoView
+    <com.example.final_535_app.view.simplevideo.JinxVideoView
             android:id="@+id/vd_video_view"
             android:layout_width="match_parent"
             app:video_view_height="220dp"
             android:layout_height="match_parent"
             android:layout_centerInParent="true">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:orientation="horizontal">
+                <Button
+                    android:id="@+id/btn_open_dankamu"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="14sp"
+                    android:textColor="@color/white"
+                    android:text="开启弹幕"
+                    android:backgroundTint="@color/ijk_color_blue_700"
+                    android:layout_weight="1"
+                    android:layout_margin="10dp"
+                    android:background="@drawable/video_focus_button_style"/>
+                <Button
+                    android:id="@+id/btn_close_dankamu"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="14sp"
+                    android:textColor="@color/white"
+                    android:layout_weight="1"
+                    android:layout_margin="10dp"
+                    android:text="关闭弹幕"
+                    android:background="@drawable/video_focus_button_style"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:orientation="horizontal">
+                <EditText
+                    android:id="@+id/et_dankamu_text"
+                    android:layout_width="320dp"
+                    android:textSize="14sp"
+                    android:layout_height="match_parent"
+                    android:hint="请输入发送弹幕内容"/>
+                <Button
+                    android:id="@+id/btn_send_dankamu"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="14sp"
+                    android:textColor="@color/white"
+                    android:backgroundTint="@color/ijk_color_blue_500"
+                    android:text="发送弹幕"
+                    android:background="@drawable/video_focus_button_style"/>
+            </LinearLayout>
             <LinearLayout
                 android:id="@+id/ll_video_owner"
                 android:layout_width="match_parent"
@@ -229,8 +275,9 @@
 
         </com.example.final_535_app.view.simplevideo.JinxVideoView>
         <!--播放器下面的UI写在这里-->
-        <master.flame.danmaku.ui.widget.DanmakuView
-            android:id="@+id/danmaku_view"
-            android:layout_width="match_parent"
-            android:layout_height="160dp" />
+    <master.flame.danmaku.ui.widget.DanmakuView
+        android:id="@+id/danmaku_view"
+        android:layout_width="match_parent"
+        android:layout_marginTop="30dp"
+        android:layout_height="160dp" />
 </RelativeLayout>
