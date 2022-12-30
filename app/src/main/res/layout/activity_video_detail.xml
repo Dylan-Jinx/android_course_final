@@ -46,6 +46,7 @@
                     android:id="@+id/et_dankamu_text"
                     android:layout_width="320dp"
                     android:textSize="14sp"
+                    android:background="@null"
                     android:layout_height="match_parent"
                     android:hint="请输入发送弹幕内容"/>
                 <Button
@@ -58,6 +59,10 @@
                     android:text="发送弹幕"
                     android:background="@drawable/video_focus_button_style"/>
             </LinearLayout>
+            <com.google.android.material.divider.MaterialDivider
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/ijk_color_blue_100"/>
             <LinearLayout
                 android:id="@+id/ll_video_owner"
                 android:layout_width="match_parent"
